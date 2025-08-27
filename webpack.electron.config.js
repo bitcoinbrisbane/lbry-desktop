@@ -1,18 +1,10 @@
-const config = require('./config');
 const path = require('path');
-const webpack = require('webpack');
-const merge = require('webpack-merge');
+const { merge } = require('webpack-merge');
 const baseConfig = require('./webpack.base.config.js');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const { DefinePlugin, ProvidePlugin } = require('webpack');
-const { getIfUtils, removeEmpty } = require('webpack-config-utils');
-const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
-
 const STATIC_ROOT = path.resolve(__dirname, 'static/');
 const DIST_ROOT = path.resolve(__dirname, 'dist/');
-const NODE_ENV = process.env.NODE_ENV || 'development';
-
-const { ifProduction } = getIfUtils(NODE_ENV);
 
 let mainConfig = {
   target: 'electron-main',
@@ -74,7 +66,6 @@ if (process.env.NODE_ENV === 'production') {
     },
   });
 } else {
-  const nodeExternals = require('webpack-node-externals');
   // Apply dev overrides
   mainConfig = merge(mainConfig, {
     externals: {
@@ -93,17 +84,6 @@ let plugins = [
     __: ['i18n.js', '__'],
   }),
 ];
-
-// if (hasSentryToken) {
-//   plugins.push(
-//     new SentryWebpackPlugin({
-//       include: './dist',
-//       ignoreFile: '.sentrycliignore',
-//       ignore: ['node_modules', 'webpack.config.js', 'webworkers'],
-//       configFile: 'sentry.properties',
-//     })
-//   );
-// }
 
 const renderConfig = {
   target: 'electron-renderer',

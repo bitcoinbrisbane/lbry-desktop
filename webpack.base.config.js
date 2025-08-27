@@ -8,7 +8,6 @@ const TerserPlugin = require('terser-webpack-plugin');
 const NODE_ENV = process.env.NODE_ENV || 'development';
 const { ifProduction } = getIfUtils(NODE_ENV);
 const UI_ROOT = path.resolve(__dirname, 'ui/');
-const STATIC_ROOT = path.resolve(__dirname, 'static/');
 
 let baseConfig = {
   mode: ifProduction('production', 'development'),
@@ -17,7 +16,9 @@ let baseConfig = {
     minimizer: [
       new TerserPlugin({
         parallel: true,
-        sourceMap: true,
+        terserOptions: {
+          sourceMap: true,
+        },
       }),
     ],
   },
@@ -41,14 +42,17 @@ let baseConfig = {
         use: [
           { loader: 'style-loader' },
           { loader: 'css-loader' },
-          { loader: 'postcss-loader',
+          {
+            loader: 'postcss-loader',
             options: {
-              plugins: function () {
-                return [ require('postcss-rtl')() ];
+              postcssOptions: {
+                plugins: function () {
+                  return [require('postcss-rtl')()];
+                },
               },
             },
           },
-          { loader: 'sass-loader'},
+          { loader: 'sass-loader' },
         ],
       },
       {
@@ -95,8 +99,10 @@ let baseConfig = {
   },
 
   plugins: [
-    new webpack.IgnorePlugin({resourceRegExp: /^\.\/locale$/, contextRegExp: /moment$/}),
-    new webpack.EnvironmentPlugin(['NODE_ENV']),
+    new webpack.IgnorePlugin({ resourceRegExp: /^\.\/locale$/, contextRegExp: /moment$/ }),
+    new webpack.EnvironmentPlugin({
+      NODE_ENV: 'development' // default value if NODE_ENV is not defined
+    }),
     new DefinePlugin({
       __static: `"${path.join(__dirname, 'static').replace(/\\/g, '\\\\')}"`,
       'process.env.NODE_ENV': JSON.stringify(NODE_ENV),
