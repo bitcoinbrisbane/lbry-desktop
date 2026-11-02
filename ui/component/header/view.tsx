@@ -13,7 +13,7 @@ import React from 'react';
 import SkipNavigationButton from 'component/skipNavigationButton';
 import Tooltip from 'component/common/tooltip';
 import WunderBar from 'component/wunderbar';
-import * as remote from '@electron/remote';
+import { ipcRenderer } from 'electron';
 import { IS_MAC } from 'component/app/view';
 import NavigationButton from 'component/navigationButton';
 
@@ -168,7 +168,7 @@ const Header = (props: Props) => {
         'header--mac': IS_MAC,
       })}
       onDoubleClick={(e) => {
-        remote.getCurrentWindow().maximize();
+        ipcRenderer.send('window:maximize');
       }}
     >
       <div className="card__actions--between header__contents">

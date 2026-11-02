@@ -1,4 +1,4 @@
-import * as remote from '@electron/remote';
+import { ipcRenderer } from 'electron';
 import React from 'react';
 import classnames from 'classnames';
 import * as RENDER_MODES from 'constants/file_render_modes';
@@ -66,7 +66,7 @@ class FileRender extends React.PureComponent<Props> {
   }
 
   exitFullscreen() {
-    remote.getCurrentWindow().setFullScreen(false);
+    ipcRenderer.send('window:setFullScreen', false);
   }
 
   renderViewer() {
