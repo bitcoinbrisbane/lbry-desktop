@@ -1,58 +1,58 @@
-import 'scss/component/_comment-create.scss';
+import "scss/component/_comment-create.scss";
 
-import { buildValidSticker } from 'util/comments';
-import { FF_MAX_CHARS_IN_COMMENT } from 'constants/form-field';
-import { FormFieldAreaAdvanced, Form } from 'component/common/form';
-import { getChannelIdFromClaim } from 'util/claim';
-import { Lbryio } from 'lbryinc';
-import { useHistory } from 'react-router';
-import * as ICONS from 'constants/icons';
-import * as KEYCODES from 'constants/keycodes';
-import * as PAGES from 'constants/pages';
-import Button from 'component/button';
-import ChannelThumbnail from 'component/channelThumbnail';
-import classnames from 'classnames';
-import CreditAmount from 'component/common/credit-amount';
-import EmoteSelector from './emote-selector';
-import Empty from 'component/common/empty';
-import FilePrice from 'component/filePrice';
-import I18nMessage from 'component/i18nMessage';
-import Icon from 'component/common/icon';
-import OptimizedImage from 'component/optimizedImage';
-import React from 'react';
-import StickerSelector from './sticker-selector';
-import CommentCreateHeader from './comment-create-header';
-import type { ElementRef } from 'react';
-import UriIndicator from 'component/uriIndicator';
-import usePersistedState from 'effects/use-persisted-state';
-import WalletTipAmountSelector from 'component/walletTipAmountSelector';
-import { getStripeEnvironment } from 'util/stripe';
+import { buildValidSticker } from "util/comments";
+import { FF_MAX_CHARS_IN_COMMENT } from "constants/form-field";
+import { FormFieldAreaAdvanced, Form } from "component/common/form";
+import { getChannelIdFromClaim } from "util/claim";
+import { Lbryio } from "lbryinc";
+import { useHistory } from "react-router";
+import * as ICONS from "constants/icons";
+import * as KEYCODES from "constants/keycodes";
+import * as PAGES from "constants/pages";
+import Button from "component/button";
+import ChannelThumbnail from "component/channelThumbnail";
+import classnames from "classnames";
+import CreditAmount from "component/common/credit-amount";
+import EmoteSelector from "./emote-selector";
+import Empty from "component/common/empty";
+import FilePrice from "component/filePrice";
+import I18nMessage from "component/i18nMessage";
+import Icon from "component/common/icon";
+import OptimizedImage from "component/optimizedImage";
+import React from "react";
+import StickerSelector from "./sticker-selector";
+import CommentCreateHeader from "./comment-create-header";
+import type { ElementRef } from "react";
+import UriIndicator from "component/uriIndicator";
+import usePersistedState from "effects/use-persisted-state";
+import WalletTipAmountSelector from "component/walletTipAmountSelector";
+import { getStripeEnvironment } from "util/stripe";
 const stripeEnvironment = getStripeEnvironment();
 
-const TAB_FIAT = 'TabFiat';
-const TAB_LBC = 'TabLBC';
+const TAB_FIAT = "TabFiat";
+const TAB_LBC = "TabLBC";
 
 // for sendCashTip REMOVE
 // type TipParams = { tipAmount: number, tipChannelName: string, channelClaimId: string };
 // type UserParams = { activeChannelName: ?string, activeChannelId: ?string };
 
 type Props = {
-  activeChannel: string,
-  activeChannelClaim: ChannelClaim | null | undefined,
-  bottom: boolean,
-  hasChannels: boolean,
-  claim: StreamClaim,
-  claimIsMine: boolean,
-  isFetchingChannels: boolean,
-  isNested: boolean,
-  isReply: boolean,
-  parentId: string,
+  activeChannel: string;
+  activeChannelClaim: ChannelClaim | null | undefined;
+  bottom: boolean;
+  hasChannels: boolean;
+  claim: StreamClaim;
+  claimIsMine: boolean;
+  isFetchingChannels: boolean;
+  isNested: boolean;
+  isReply: boolean;
+  parentId: string;
   settingsByChannelId: {
-    [channelId: string]: PerChannelSettings
-  },
-  shouldFetchComment: boolean,
-  supportDisabled: boolean,
-  uri: string,
+    [channelId: string]: PerChannelSettings;
+  };
+  shouldFetchComment: boolean;
+  supportDisabled: boolean;
+  uri: string;
   createComment: (
     arg1: string,
     arg2: string,
@@ -60,24 +60,16 @@ type Props = {
     arg4?: string | null | undefined,
     arg5?: string | null | undefined,
     arg6?: string | null | undefined,
-    arg7?: boolean | null | undefined,
-  ) => Promise<any>,
-  doFetchCreatorSettings: (channelId: string) => Promise<any>,
-  doToast: (
-    arg1: {
-      message: string
-    },
-  ) => void,
-  fetchComment: (commentId: string) => Promise<any>,
-  onCancelReplying?: () => void,
-  onDoneReplying?: () => void,
-  sendTip: (
-    arg1: Record<any, any>,
-    arg2: (arg1?: any) => void,
-    arg3: (arg1?: any) => void,
-  ) => void,
-  setQuickReply: (arg1?: any) => void,
-  toast: (arg1: string) => void
+    arg7?: boolean | null | undefined
+  ) => Promise<any>;
+  doFetchCreatorSettings: (channelId: string) => Promise<any>;
+  doToast: (arg1: { message: string }) => void;
+  fetchComment: (commentId: string) => Promise<any>;
+  onCancelReplying?: () => void;
+  onDoneReplying?: () => void;
+  sendTip: (arg1: Record<any, any>, arg2: (arg1?: any) => void, arg3: (arg1?: any) => void) => void;
+  setQuickReply: (arg1?: any) => void;
+  toast: (arg1: string) => void;
 };
 
 export function CommentCreate(props: Props) {
@@ -122,8 +114,8 @@ export function CommentCreate(props: Props) {
   const [selectedSticker, setSelectedSticker] = React.useState<any>();
   const [tipAmount, setTipAmount] = React.useState(1);
   const [convertedAmount, setConvertedAmount] = React.useState<any>();
-  const [commentValue, setCommentValue] = React.useState('');
-  const [advancedEditor, setAdvancedEditor] = usePersistedState('comment-editor-mode', false);
+  const [commentValue, setCommentValue] = React.useState("");
+  const [advancedEditor, setAdvancedEditor] = usePersistedState("comment-editor-mode", false);
   const [stickerSelector, setStickerSelector] = React.useState<any>();
   const [activeTab, setActiveTab] = React.useState<any>();
   const [tipError, setTipError] = React.useState<any>();
@@ -166,10 +158,10 @@ export function CommentCreate(props: Props) {
   function handleCommentChange(event: unknown) {
     let commentValue;
     if (isReply) {
-// @ts-expect-error - TS2339 - Property 'target' does not exist on type 'unknown'.
+      // @ts-expect-error - TS2339 - Property 'target' does not exist on type 'unknown'.
       commentValue = advancedEditor ? event : event.target.value;
     } else {
-// @ts-expect-error - TS2339 - Property 'target' does not exist on type 'unknown'.
+      // @ts-expect-error - TS2339 - Property 'target' does not exist on type 'unknown'.
       commentValue = advancedEditor ? event : event.target.value;
     }
 
@@ -179,20 +171,20 @@ export function CommentCreate(props: Props) {
   function altEnterListener(e: React.KeyboardEvent<any>) {
     if ((e.ctrlKey || e.metaKey) && e.keyCode === KEYCODES.ENTER) {
       e.preventDefault();
-// @ts-expect-error - TS2339 - Property 'current' does not exist on type 'unknown'.
+      // @ts-expect-error - TS2339 - Property 'current' does not exist on type 'unknown'.
       buttonRef.current.click();
     }
   }
 
   function onTextareaFocus() {
-// @ts-expect-error - TS2769 - No overload matches this call.
-    window.addEventListener('keydown', altEnterListener);
+    // @ts-expect-error - TS2769 - No overload matches this call.
+    window.addEventListener("keydown", altEnterListener);
     setTextareaFocused(true);
   }
 
   function onTextareaBlur() {
-// @ts-expect-error - TS2769 - No overload matches this call.
-    window.removeEventListener('keydown', altEnterListener);
+    // @ts-expect-error - TS2769 - No overload matches this call.
+    window.removeEventListener("keydown", altEnterListener);
     setTextareaFocused(false);
   }
 
@@ -201,8 +193,8 @@ export function CommentCreate(props: Props) {
 
     if (!channelId) {
       doToast({
-        message: __('Unable to verify channel settings. Try refreshing the page.'),
-// @ts-expect-error - TS2345 - Argument of type '{ message: string; isError: boolean; }' is not assignable to parameter of type '{ message: string; }'.
+        message: __("Unable to verify channel settings. Try refreshing the page."),
+        // @ts-expect-error - TS2345 - Argument of type '{ message: string; isError: boolean; }' is not assignable to parameter of type '{ message: string; }'.
         isError: true,
       });
       return;
@@ -210,7 +202,7 @@ export function CommentCreate(props: Props) {
 
     // if comment post didn't work, but tip was already made, try again to create comment
     if (commentFailure && tipAmount === successTip.tipAmount) {
-// @ts-expect-error - TS2554 - Expected 3 arguments, but got 1.
+      // @ts-expect-error - TS2554 - Expected 3 arguments, but got 1.
       handleCreateComment(successTip.txid);
       return;
     } else {
@@ -224,8 +216,8 @@ export function CommentCreate(props: Props) {
 
       if (lockedMinAmount !== currentMinAmount) {
         doToast({
-          message: __('The creator just updated the minimum setting. Please revise or double-check your tip amount.'),
-// @ts-expect-error - TS2345 - Argument of type '{ message: string; isError: boolean; }' is not assignable to parameter of type '{ message: string; }'.
+          message: __("The creator just updated the minimum setting. Please revise or double-check your tip amount."),
+          // @ts-expect-error - TS2345 - Argument of type '{ message: string; isError: boolean; }' is not assignable to parameter of type '{ message: string; }'.
           isError: true,
         });
         setReviewingSupportComment(false);
@@ -256,7 +248,7 @@ export function CommentCreate(props: Props) {
           const { txid } = response;
           // todo: why the setTimeout?
           setTimeout(() => {
-// @ts-expect-error - TS2554 - Expected 3 arguments, but got 1.
+            // @ts-expect-error - TS2554 - Expected 3 arguments, but got 1.
             handleCreateComment(txid);
           }, 1500);
 
@@ -304,14 +296,14 @@ export function CommentCreate(props: Props) {
 
     const stickerValue = selectedSticker && buildValidSticker(selectedSticker.name);
 
-// @ts-expect-error - TS2345 - Argument of type 'unknown' is not assignable to parameter of type 'string'.
+    // @ts-expect-error - TS2345 - Argument of type 'unknown' is not assignable to parameter of type 'string'.
     createComment(stickerValue || commentValue, claimId, parentId, txid, payment_intent_id, environment, !!stickerValue)
       .then((res) => {
         setSubmitting(false);
         if (setQuickReply) setQuickReply(res);
 
         if (res && res.signature) {
-          if (!stickerValue) setCommentValue('');
+          if (!stickerValue) setCommentValue("");
           setReviewingSupportComment(false);
           setIsSupportComment(false);
           setCommentFailure(false);
@@ -342,13 +334,13 @@ export function CommentCreate(props: Props) {
     if (!channelSettings && channelId) {
       doFetchCreatorSettings(channelId);
     }
-  }, []);  
+  }, []);
 
   // Notifications: Fetch top-level comments to identify if it has been deleted and can reply to it
   React.useEffect(() => {
     if (shouldFetchComment && fetchComment) {
       fetchComment(parentId).then((result) => {
-        setDeletedComment(String(result).includes('Error'));
+        setDeletedComment(String(result).includes("Error"));
       });
     }
   }, [fetchComment, shouldFetchComment, parentId]);
@@ -369,14 +361,14 @@ export function CommentCreate(props: Props) {
 
     // @ts-expect-error - TS2339 (ts-migration)
     Lbryio.call(
-      'account',
-      'check',
+      "account",
+      "check",
       {
         channel_claim_id: channelClaimId,
         channel_name: tipChannelName,
         environment: stripeEnvironment,
       },
-      'post'
+      "post"
     )
       .then((accountCheckResponse) => {
         if (accountCheckResponse === true && canReceiveFiatTip !== true) {
@@ -398,7 +390,7 @@ export function CommentCreate(props: Props) {
   );
 
   if (channelSettings && !channelSettings.comments_enabled) {
-    return <Empty padded text={__('This channel has disabled comments on their page.')} />;
+    return <Empty padded text={__("This channel has disabled comments on their page.")} />;
   }
 
   if (!isFetchingChannels && !hasChannels) {
@@ -412,12 +404,12 @@ export function CommentCreate(props: Props) {
       >
         <FormFieldAreaAdvanced
           type="textarea"
-          name={'comment_signup_prompt'}
-          placeholder={__('Say something about this...')}
+          name={"comment_signup_prompt"}
+          placeholder={__("Say something about this...")}
         />
         <div className="section__actions--no-margin">
           {/* @ts-expect-error - TS2322 (ts-migration) */}
-          <Button disabled button="primary" label={__('Post --[button to submit something]--')} />
+          <Button disabled button="primary" label={__("Post --[button to submit something]--")} />
         </div>
       </div>
     );
@@ -426,14 +418,14 @@ export function CommentCreate(props: Props) {
   return (
     <Form
       onSubmit={() => {}}
-// @ts-expect-error - TS2769 - No overload matches this call.
-      className={classnames('comment-create', {
-        'comment-create--reply': isReply,
-        'comment-create--nestedReply': isNested,
-        'comment-create--bottom': bottom,
+      // @ts-expect-error - TS2769 - No overload matches this call.
+      className={classnames("comment-create", {
+        "comment-create--reply": isReply,
+        "comment-create--nestedReply": isNested,
+        "comment-create--bottom": bottom,
         // Keep the box small until the user actually starts commenting, so
         // comments are visible without scrolling past a large empty editor.
-        'comment-create--compact': !isReply && !bottom && !textareaFocused && !commentValue,
+        "comment-create--compact": !isReply && !bottom && !textareaFocused && !commentValue,
       })}
     >
       {/* Input Box/Preview Box */}
@@ -489,7 +481,7 @@ export function CommentCreate(props: Props) {
           <FormFieldAreaAdvanced
             autoFocus={isReply}
             charCount={charCount}
-            className={isReply ? 'content_reply' : 'content_comment'}
+            className={isReply ? "content_reply" : "content_comment"}
             disabled={isFetchingChannels}
             header={
               <CommentCreateHeader
@@ -498,16 +490,16 @@ export function CommentCreate(props: Props) {
                 advancedHandler={() => setAdvancedEditor(!advancedEditor)}
               />
             }
-            name={isReply ? 'content_reply' : 'content_description'}
-// @ts-expect-error - TS2322 - Type 'unknown' is not assignable to type 'LegacyRef<FormFieldAreaAdvanced>'.
+            name={isReply ? "content_reply" : "content_description"}
+            // @ts-expect-error - TS2322 - Type 'unknown' is not assignable to type 'LegacyRef<FormFieldAreaAdvanced>'.
             ref={formFieldRef}
             onChange={handleCommentChange}
             openEmoteMenu={() => setShowEmotes(!showEmotes)}
             onFocus={onTextareaFocus}
             onBlur={onTextareaBlur}
-            placeholder={__('Say something about this...')}
+            placeholder={__("Say something about this...")}
             value={commentValue}
-            type={advancedEditor ? 'markdown' : 'textarea'}
+            type={advancedEditor ? "markdown" : "textarea"}
             textAreaMaxLength={FF_MAX_CHARS_IN_COMMENT}
           />
         </>
@@ -542,10 +534,10 @@ export function CommentCreate(props: Props) {
             disabled={disabled || !minAmountMet}
             label={
               isSubmitting
-                ? __('Sending...')
+                ? __("Sending...")
                 : commentFailure && tipAmount === successTip.tipAmount
-                ? __('Re-submit')
-                : __('Send')
+                  ? __("Re-submit")
+                  : __("Send")
             }
             onClick={handleSupportComment}
           />
@@ -553,13 +545,13 @@ export function CommentCreate(props: Props) {
           <Button
             // @ts-expect-error - TS2322 (ts-migration)
             button="primary"
-            label={__('Send')}
+            label={__("Send")}
             disabled={isSupportComment && (tipError || disableReviewButton)}
             onClick={() => {
               if (isSupportComment) {
                 handleSupportComment();
               } else {
-// @ts-expect-error - TS2554 - Expected 3 arguments, but got 0.
+                // @ts-expect-error - TS2554 - Expected 3 arguments, but got 0.
                 handleCreateComment();
               }
               setSelectedSticker(null);
@@ -575,7 +567,7 @@ export function CommentCreate(props: Props) {
             type="button"
             button="primary"
             icon={activeTab === TAB_LBC ? ICONS.LBC : ICONS.FINANCE} // only LBC
-            label={__('Review')}
+            label={__("Review")}
             onClick={() => setReviewingSupportComment(true)}
           />
         ) : (
@@ -589,13 +581,13 @@ export function CommentCreate(props: Props) {
               label={
                 isReply
                   ? isSubmitting
-                    ? __('Replying...')
-                    : __('Reply')
+                    ? __("Replying...")
+                    : __("Reply")
                   : isSubmitting
-                  ? __('Commenting...')
-                  : __('Comment --[button to submit something]--')
+                    ? __("Commenting...")
+                    : __("Comment --[button to submit something]--")
               }
-// @ts-expect-error - TS2554 - Expected 3 arguments, but got 0.
+              // @ts-expect-error - TS2554 - Expected 3 arguments, but got 0.
               onClick={() => activeChannelClaim && commentValue.length && handleCreateComment()}
             />
           )
@@ -605,8 +597,8 @@ export function CommentCreate(props: Props) {
         {!supportDisabled && !stickerSelector && (
           <>
             {getActionButton(
-              __('Stickers'),
-              isReviewingStickerComment ? __('Different Sticker') : undefined,
+              __("Stickers"),
+              isReviewingStickerComment ? __("Different Sticker") : undefined,
               ICONS.STICKER,
               () => {
                 if (isReviewingStickerComment) setReviewingStickerComment(false);
@@ -619,8 +611,8 @@ export function CommentCreate(props: Props) {
               <>
                 {(!isSupportComment || activeTab !== TAB_LBC) &&
                   getActionButton(
-                    __('Credits'),
-                    isSupportComment ? __('Switch to Credits') : undefined,
+                    __("Credits"),
+                    isSupportComment ? __("Switch to Credits") : undefined,
                     ICONS.LBC,
                     () => {
                       setIsSupportComment(true);
@@ -631,8 +623,8 @@ export function CommentCreate(props: Props) {
                 {stripeEnvironment &&
                   (!isSupportComment || activeTab !== TAB_FIAT) &&
                   getActionButton(
-                    __('Cash'),
-                    isSupportComment ? __('Switch to Cash') : undefined,
+                    __("Cash"),
+                    isSupportComment ? __("Switch to Cash") : undefined,
                     ICONS.FINANCE,
                     () => {
                       setIsSupportComment(true);
@@ -654,7 +646,7 @@ export function CommentCreate(props: Props) {
             // @ts-expect-error - TS2322 (ts-migration)
             disabled={isSupportComment && isSubmitting}
             button="link"
-            label={__('Cancel')}
+            label={__("Cancel")}
             onClick={() => {
               if (isSupportComment || isReviewingSupportComment) {
                 if (!isReviewingSupportComment) setIsSupportComment(false);
@@ -676,20 +668,20 @@ export function CommentCreate(props: Props) {
         )}
 
         {/* Help Text */}
-        {deletedComment && <div className="error__text">{__('This comment has been deleted.')}</div>}
+        {deletedComment && <div className="error__text">{__("This comment has been deleted.")}</div>}
         {!!minAmount && (
           <div className="help--notice comment-create__minAmountNotice">
             {/* @ts-expect-error - TS2745, TS2322 (ts-migration) */}
             <I18nMessage tokens={{ lbc: <CreditAmount noFormat amount={minAmount} /> }}>
-              {minTip ? 'Comment min: %lbc%' : minSuper ? 'HyperChat min: %lbc%' : ''}
+              {minTip ? "Comment min: %lbc%" : minSuper ? "HyperChat min: %lbc%" : ""}
             </I18nMessage>
             <Icon
               customTooltipText={
                 minTip
-                  ? __('This channel requires a minimum tip for each comment.')
+                  ? __("This channel requires a minimum tip for each comment.")
                   : minSuper
-                  ? __('This channel requires a minimum amount for HyperChats to be visible.')
-                  : ''
+                    ? __("This channel requires a minimum amount for HyperChats to be visible.")
+                    : ""
               }
               className="icon--help"
               icon={ICONS.HELP}

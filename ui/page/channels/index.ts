@@ -1,10 +1,10 @@
 //@ts-nocheck
-import {connect} from 'react-redux';
-import { selectMyChannelUrls, selectFetchingMyChannels, makeSelectClaimIsPending } from 'redux/selectors/claims';
-import { doFetchChannelListMine } from 'redux/actions/claims';
-import { doSetActiveChannel } from 'redux/actions/app';
-import { selectYoutubeChannels } from 'redux/selectors/user';
-import ChannelsPage from './view';
+import { connect } from "react-redux";
+import { selectMyChannelUrls, selectFetchingMyChannels, makeSelectClaimIsPending } from "redux/selectors/claims";
+import { doFetchChannelListMine } from "redux/actions/claims";
+import { doSetActiveChannel } from "redux/actions/app";
+import { selectYoutubeChannels } from "redux/selectors/user";
+import ChannelsPage from "./view";
 
 const select = (state: unknown) => {
   const channelUrls = selectMyChannelUrls(state);

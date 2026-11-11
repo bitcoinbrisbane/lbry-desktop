@@ -1,8 +1,8 @@
 export function toHex(str: string): string {
   const s = unescape(encodeURIComponent(str));
-  let result = '';
+  let result = "";
   for (let i = 0; i < s.length; i++) {
-    result += s.charCodeAt(i).toString(16).padStart(2, '0');
+    result += s.charCodeAt(i).toString(16).padStart(2, "0");
   }
 
   return result;

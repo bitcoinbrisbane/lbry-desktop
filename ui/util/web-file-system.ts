@@ -4,7 +4,7 @@
 // Wrapper for webkitGetAsEntry
 // Note: webkitGetAsEntry might be renamed to GetAsEntry
 const getAsEntry = (item: unknown) => {
-  if (item.kind === 'file' && item.webkitGetAsEntry) {
+  if (item.kind === "file" && item.webkitGetAsEntry) {
     return item.webkitGetAsEntry();
   }
 };
