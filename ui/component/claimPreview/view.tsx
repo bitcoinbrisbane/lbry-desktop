@@ -324,8 +324,8 @@ const ClaimPreview = forwardRef<any, Record<any, any>>((props: Props, ref: any) 
   }
 
   return (
-    // @ts-expect-error - TS2322 (ts-migration)
     <WrapperElement
+      // @ts-expect-error - TS2322 (ts-migration)
       ref={ref}
       role="link"
       onClick={pending || type === "inline" ? undefined : handleOnClick}

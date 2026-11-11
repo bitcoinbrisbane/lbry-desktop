@@ -31,8 +31,8 @@ export default function Nag(props: Props) {
     >
       <div className="nag__message">{message}</div>
       {(href || onClick) && (
-        // @ts-expect-error - TS2322 (ts-migration)
         <Button
+          // @ts-expect-error - TS2322 (ts-migration)
           className={classnames("nag__button", {
             "nag__button--helpful": type === "helpful",
             "nag__button--error": type === "error",

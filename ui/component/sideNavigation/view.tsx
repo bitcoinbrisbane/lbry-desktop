@@ -445,8 +445,8 @@ function SubscriptionListItem({ subscription }: { subscription: Subscription }) 
   const { uri, channelName } = subscription;
   return (
     <li className="navigation-link__wrapper">
-      {/* @ts-expect-error - TS2322 (ts-migration) */}
       <Button
+        // @ts-expect-error - TS2322 (ts-migration)
         navigate={uri}
         className="navigation-link navigation-link--with-thumbnail"
         activeClass="navigation-link--active"

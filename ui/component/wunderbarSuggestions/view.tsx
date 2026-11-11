@@ -1,4 +1,5 @@
 import type { ElementRef } from "react";
+// @ts-expect-error - TS2305 (ts-migration)
 import { URL, URL_LOCAL, URL_DEV, KNOWN_APP_DOMAINS } from "config";
 import * as PAGES from "constants/pages";
 import * as ICONS from "constants/icons";

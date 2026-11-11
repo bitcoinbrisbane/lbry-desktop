@@ -1,3 +1,4 @@
+// @ts-expect-error - TS2882 (ts-migration)
 import "scss/component/_sticker-selector.scss";
 import { FREE_GLOBAL_STICKERS, PAID_GLOBAL_STICKERS } from "constants/stickers";
 import * as ICONS from "constants/icons";
@@ -41,9 +42,9 @@ export default function StickerSelector(props: Props) {
       </div>
       <div className="stickerSelector__listBody-rowItems">
         {rowStickers.map((sticker) => (
-          // @ts-expect-error - TS2322 (ts-migration)
           <Button
             key={sticker.name}
+            // @ts-expect-error - TS2322 (ts-migration)
             title={sticker.name}
             button="alt"
             className="button--file-action"

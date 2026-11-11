@@ -188,9 +188,9 @@ const Header = (props: Props) => {
                 <SkipNavigationButton />
                 {!authHeader && (
                   <span style={{ position: "relative" }}>
-                    {/* @ts-expect-error - TS2322 (ts-migration) */}
                     <Button
                       aria-label={sidebarLabel}
+                      // @ts-expect-error - TS2322 (ts-migration)
                       className="header__navigationItem--icon button-rotate"
                       icon={ICONS.MENU}
                       aria-expanded={sidebarOpen}
@@ -201,9 +201,9 @@ const Header = (props: Props) => {
                     </Button>
                   </span>
                 )}
-                {/* @ts-expect-error - TS2322 (ts-migration) */}
                 <Button
                   aria-label={__("Home")}
+                  // @ts-expect-error - TS2322 (ts-migration)
                   className="header__navigationItem--logo"
                   onClick={() => {
                     // here use state.router.location.pathname
