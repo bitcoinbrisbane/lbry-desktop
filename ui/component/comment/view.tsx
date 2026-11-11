@@ -254,12 +254,12 @@ function CommentView(props: Props) {
               {!author ? (
                 <span className="comment__author">{__("Anonymous")}</span>
               ) : (
+                // @ts-expect-error - TS2740 (ts-migration)
                 <UriIndicator
                   className={classnames("comment__author", {
                     "comment__author--creator": commentByOwnerOfContent,
                   })}
                   link
-                  // @ts-expect-error - TS2322 (ts-migration)
                   uri={authorUri}
                 />
               )}
@@ -407,6 +407,7 @@ function CommentView(props: Props) {
                 )}
 
                 {isReplying && (
+                  // @ts-expect-error - TS2740 (ts-migration)
                   <CommentCreate
                     isReply
                     uri={uri}
@@ -418,7 +419,6 @@ function CommentView(props: Props) {
                     onCancelReplying={() => {
                       setReplying(false);
                     }}
-                    // @ts-expect-error - TS2322 (ts-migration)
                     supportDisabled={supportDisabled}
                   />
                 )}
