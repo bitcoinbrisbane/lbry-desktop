@@ -2371,5 +2371,6 @@
   "Account %account_id% imported. Balances and claims will appear once the wallet finishes syncing.": "Account %account_id% imported. Balances and claims will appear once the wallet finishes syncing.",
   "The daemon did not confirm the import.": "The daemon did not confirm the import.",
   "Only image files (png, jpg, gif) are supported.": "Only image files (png, jpg, gif) are supported.",
+  "Open in Folder": "Open in Folder",
   "--end--": "--end--"
 }
