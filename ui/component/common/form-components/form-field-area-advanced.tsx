@@ -1,3 +1,4 @@
+// @ts-expect-error - TS2882 (ts-migration)
 import "easymde/dist/easymde.min.css";
 import { FF_MAX_CHARS_DEFAULT } from "constants/form-field";
 import { openEditorMenu, stopContextMenu } from "util/context-menu";

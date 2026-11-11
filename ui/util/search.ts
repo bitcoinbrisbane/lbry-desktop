@@ -1,4 +1,5 @@
 import { isNameValid, isURIValid, normalizeURI, parseURI } from "util/lbryURI";
+// @ts-expect-error - TS2305 (ts-migration)
 import { URL as SITE_URL, URL_LOCAL, URL_DEV } from "config";
 import { SEARCH_OPTIONS } from "constants/search";
 

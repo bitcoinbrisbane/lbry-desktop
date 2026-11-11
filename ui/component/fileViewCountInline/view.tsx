@@ -1,4 +1,5 @@
 import React from "react";
+// @ts-expect-error - TS2882 (ts-migration)
 import "scss/component/_view_count.scss";
 import { useHistory } from "react-router";
 import { toCompactNotation } from "util/string";

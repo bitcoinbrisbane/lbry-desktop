@@ -1,6 +1,7 @@
 import React from "react";
 import { Modal } from "modal/modal";
 import Lightbox from "react-awesome-lightbox";
+// @ts-expect-error - TS2882 (ts-migration)
 import "react-awesome-lightbox/build/style.css";
 
 type Props = {

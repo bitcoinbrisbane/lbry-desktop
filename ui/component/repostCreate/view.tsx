@@ -11,6 +11,7 @@ import { creditsToString } from "util/format-credits";
 import analytics from "analytics";
 import LbcSymbol from "component/common/lbc-symbol";
 import ClaimPreview from "component/claimPreview";
+// @ts-expect-error - TS2305 (ts-migration)
 import { URL as SITE_URL, URL_LOCAL, URL_DEV } from "config";
 import HelpLink from "component/common/help-link";
 import WalletSpendableBalanceHelp from "component/walletSpendableBalanceHelp";

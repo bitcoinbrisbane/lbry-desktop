@@ -1,3 +1,4 @@
+// @ts-expect-error - TS2882 (ts-migration)
 import "scss/component/_comment-create.scss";
 
 import { buildValidSticker } from "util/comments";
