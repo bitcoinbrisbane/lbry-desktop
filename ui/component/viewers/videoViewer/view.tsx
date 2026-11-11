@@ -161,7 +161,7 @@ function VideoViewer(props: Props) {
     }
 
     fetch(source, { method: 'HEAD', cache: 'no-store' }).then((response) => {
-      let playerPoweredBy = response.headers.get('x-powered-by') || '';
+      const playerPoweredBy = response.headers.get('x-powered-by') || '';
       analytics.videoStartEvent(
         claimId,
         timeToStart,

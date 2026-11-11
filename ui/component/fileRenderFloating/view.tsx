@@ -192,14 +192,14 @@ export default function FileRenderFloating(props: Props) {
   // Initial update for relativePosRef:
   useEffect(() => {
     relativePosRef.current = calculateRelativePos(position.x, position.y);
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  }, []);  
 
   // Ensure player is within screen when 'isFloating' changes.
   useEffect(() => {
     if (isFloating) {
       restoreToRelativePosition();
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+     
   }, [isFloating]);
 
   // Listen to main-window resizing and adjust the fp position accordingly:

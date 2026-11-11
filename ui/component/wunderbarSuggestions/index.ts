@@ -16,7 +16,7 @@ const select = (state: unknown, props: unknown) => ({
 const perform = (dispatch: unknown, ownProps: unknown) => ({
   doResolveUris: (uris) => dispatch(doResolveUris(uris)),
   navigateToSearchPage: (query) => {
-    let encodedQuery = encodeURIComponent(query);
+    const encodedQuery = encodeURIComponent(query);
     ownProps.history.push({ pathname: `/$/search`, search: `?q=${encodedQuery}` });
     analytics.apiLogSearch();
   },

@@ -366,7 +366,7 @@ export function doSyncEncryptAndDecrypt(oldPassword: string, newPassword: string
           return dispatch(doSetSync(data.oldHash, syncApplyResponse.hash, syncApplyResponse.data));
         }
       })
-      .catch(console.error); // eslint-disable-line
+      .catch(console.error);  
   };
 }
 

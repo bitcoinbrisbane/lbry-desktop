@@ -74,7 +74,7 @@ function PostEditor(props: Props) {
           updatePublishForm({ fileText: text });
         }
       } catch (error: any) {
-        console.error(error); // eslint-disable-line
+        console.error(error);  
       }
     }
 

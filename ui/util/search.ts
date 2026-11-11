@@ -1,5 +1,4 @@
 import {isNameValid, isURIValid, normalizeURI, parseURI} from 'util/lbryURI';
-// @ts-expect-error - TS2305 (ts-migration)
 import { URL as SITE_URL, URL_LOCAL, URL_DEV } from 'config';
 import { SEARCH_OPTIONS } from 'constants/search';
 
@@ -50,7 +49,7 @@ export function getUriForSearchTerm(term: string) {
     if (includesLbryTvDev) prefix = WEB_DEV_PREFIX;
     if (includesOdysee) prefix = ODYSEE_PREFIX;
 
-    let query = (term && term.slice(prefix.length).replace(/:/g, '#')) || '';
+    const query = (term && term.slice(prefix.length).replace(/:/g, '#')) || '';
     try {
       const lbryUrl = `lbry://${query}`;
       parseURI(lbryUrl);

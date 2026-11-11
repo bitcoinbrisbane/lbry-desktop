@@ -147,8 +147,8 @@ function handleClaimAction(state: State, action: any): State {
   const byId = Object.assign({}, state.byId);
   const channelClaimCounts = Object.assign({}, state.channelClaimCounts);
   const pendingById = state.pendingById;
-  let newResolvingUrls = new Set(state.resolvingUris);
-  let myClaimIds = new Set(state.myClaims);
+  const newResolvingUrls = new Set(state.resolvingUris);
+  const myClaimIds = new Set(state.myClaims);
 
   Object.entries(resolveInfo).forEach(([url, resolveResponse]: [any, any]) => {
     const { claimsInChannel, stream, channel: channelFromResolve, collection, errorCensor } = resolveResponse;
@@ -276,8 +276,8 @@ reducers[ACTIONS.FETCH_CLAIM_LIST_MINE_COMPLETED] = (state: State, action: any):
   const byId = Object.assign({}, state.byId);
   const byUri = Object.assign({}, state.claimsByUri);
   const pendingById = Object.assign({}, state.pendingById);
-  let myClaimIds = new Set(state.myClaims);
-  let urlsForCurrentPage: unknown = [];
+  const myClaimIds = new Set(state.myClaims);
+  const urlsForCurrentPage: unknown = [];
 
   claims.forEach((claim: Claim) => {
     const { permanent_url: permanentUri, claim_id: claimId, canonical_url: canonicalUri } = claim;
@@ -329,7 +329,7 @@ reducers[ACTIONS.FETCH_CHANNEL_LIST_COMPLETED] = (state: State, action: any): St
   }: {
     claims: Array<ChannelClaim>
   } = action.data;
-  let myClaimIds = new Set(state.myClaims);
+  const myClaimIds = new Set(state.myClaims);
   const pendingById = Object.assign({}, state.pendingById);
   let myChannelClaims;
   const byId = Object.assign({}, state.byId);
@@ -394,7 +394,7 @@ reducers[ACTIONS.FETCH_COLLECTION_LIST_COMPLETED] = (state: State, action: any):
     claims: Array<CollectionClaim>
   } = action.data;
   const myClaims = state.myClaims || [];
-  let myClaimIds = new Set(myClaims);
+  const myClaimIds = new Set(myClaims);
   const pendingById = Object.assign({}, state.pendingById);
   let myCollectionClaimsSet = new Set([]);
   const byId = Object.assign({}, state.byId);
@@ -535,7 +535,7 @@ reducers[ACTIONS.UPDATE_PENDING_CLAIMS] = (state: State, action: any): State => 
   const byId = Object.assign({}, state.byId);
   const pendingById = Object.assign({}, state.pendingById);
   const byUri = Object.assign({}, state.claimsByUri);
-  let myClaimIds = new Set(state.myClaims);
+  const myClaimIds = new Set(state.myClaims);
   const myChannelClaims = new Set(state.myChannelClaims);
 
   pendingClaims.forEach((claim: Claim) => {
@@ -614,7 +614,7 @@ reducers[ACTIONS.ABANDON_CLAIM_SUCCEEDED] = (state: State, action: any): State =
   const abandoningById = Object.assign({}, state.abandoningById);
   const newMyCollectionClaims = state.myCollectionClaims ? state.myCollectionClaims.slice() : [];
 
-  let abandonedUris: unknown = [];
+  const abandonedUris: unknown = [];
 
   Object.keys(claimsByUri).forEach((uri) => {
     if (claimsByUri[uri] === claimId) {
@@ -713,8 +713,8 @@ reducers[ACTIONS.COLLECTION_PUBLISH_COMPLETED] = (state: State, action: any): St
   const myCollections = state.myCollectionClaims || [];
   const myClaims = state.myClaims || [];
   const { claimId } = action.data;
-  let myClaimIds = new Set(myClaims);
-  let myCollectionClaimsSet = new Set(myCollections);
+  const myClaimIds = new Set(myClaims);
+  const myCollectionClaimsSet = new Set(myCollections);
   myClaimIds.add(claimId);
   myCollectionClaimsSet.add(claimId);
   return Object.assign({}, state, {
@@ -916,9 +916,9 @@ reducers[ACTIONS.PURCHASE_LIST_COMPLETED] = (state: State, action: any): State =
   const page = result.page;
   const totalItems = result.total_items;
 
-  let byId = Object.assign({}, state.byId);
-  let byUri = Object.assign({}, state.claimsByUri);
-  let urlsForCurrentPage: unknown = [];
+  const byId = Object.assign({}, state.byId);
+  const byUri = Object.assign({}, state.claimsByUri);
+  const urlsForCurrentPage: unknown = [];
 
   result.items.forEach((item) => {
     if (!item.claim) {
@@ -960,13 +960,13 @@ reducers[ACTIONS.PURCHASE_LIST_FAILED] = (state: State, action: any): State => {
 reducers[ACTIONS.PURCHASE_URI_COMPLETED] = (state: State, action: any): State => {
   const { uri, purchaseReceipt } = action.data;
 
-  let byId = Object.assign({}, state.byId);
-  let byUri = Object.assign({}, state.claimsByUri);
-  let myPurchases = state.myPurchases ? state.myPurchases.slice() : [];
+  const byId = Object.assign({}, state.byId);
+  const byUri = Object.assign({}, state.claimsByUri);
+  const myPurchases = state.myPurchases ? state.myPurchases.slice() : [];
 
   const claimId = byUri[uri];
   if (claimId) {
-    let claim = byId[claimId];
+    const claim = byId[claimId];
     claim.purchase_receipt = purchaseReceipt;
   }
 

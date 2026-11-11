@@ -8,7 +8,7 @@ export default function useTween(duration: unknown, onRest: unknown) {
   const [value, setValue] = useState(0);
 
   useEffect(() => {
-    let start = performance.now();
+    const start = performance.now();
     let elapsed = 0;
     let frame;
 

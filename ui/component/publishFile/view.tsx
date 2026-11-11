@@ -217,7 +217,7 @@ function PublishFile(props: Props) {
   }
 
   function parseName(newName: unknown) {
-    let INVALID_URI_CHARS = new RegExp(regexInvalidURI, 'gu');
+    const INVALID_URI_CHARS = new RegExp(regexInvalidURI, 'gu');
 // @ts-expect-error - TS2339 - Property 'replace' does not exist on type 'unknown'.
     return newName.replace(INVALID_URI_CHARS, '-');
   }

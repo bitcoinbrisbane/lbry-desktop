@@ -8,7 +8,7 @@ import ChannelsPage from './view';
 
 const select = (state: unknown) => {
   const channelUrls = selectMyChannelUrls(state);
-  let pendingChannels: unknown = [];
+  const pendingChannels: unknown = [];
   if (channelUrls) {
     channelUrls.map((channelUrl) => {
       const isPendingUrl = makeSelectClaimIsPending(channelUrl)(state);

@@ -105,7 +105,7 @@ function SettingWalletServer(props: Props) {
   }
 
   function onAdd(serverTuple: ServerTuple) {
-    let newServerConfig = serverConfig.concat();
+    const newServerConfig = serverConfig.concat();
     newServerConfig.push(serverTuple);
     updateServers(newServerConfig);
   }

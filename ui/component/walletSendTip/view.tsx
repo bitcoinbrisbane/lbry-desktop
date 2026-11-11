@@ -166,7 +166,7 @@ function WalletSendTip(props: Props) {
     function isNan(tipAmount: unknown) {
       // testing for NaN ES5 style https://stackoverflow.com/a/35912757/3973137
       // also sometimes it's returned as a string
-      // eslint-disable-next-line
+       
       return tipAmount !== tipAmount || tipAmount === 'NaN';
     }
 

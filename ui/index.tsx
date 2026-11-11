@@ -81,9 +81,12 @@ doAuthTokenRefresh();
 // We keep a local variable for authToken because `ipcRenderer.send` does not
 // contain a response, so there is no way to know when it's been set
 let authToken;
-Lbryio.setOverride('setAuthToken', (authToken) => {
-  setAuthToken(authToken);
-  return authToken;
+Lbryio.setOverride('setAuthToken', (newAuthToken) => {
+  setAuthToken(newAuthToken);
+  // Keep the local cache in step; the parameter previously shadowed this
+  // variable, so the cache never actually worked.
+  authToken = newAuthToken;
+  return newAuthToken;
 });
 
 Lbryio.setOverride(
@@ -246,18 +249,18 @@ function AppWrapper() {
     moment.locale(ipcRenderer.sendSync('app:getLocale'));
 
     ipcRenderer.on('auto-update-error', (event, message) => {
-      console.error(message); // eslint-disable-line no-console
+      console.error(message);  
     });
 
     if (['win32', 'darwin'].includes(process.platform) || !!process.env.APPIMAGE) {
       ipcRenderer.on('auto-update-available', () => {
-        console.log('Update available'); // eslint-disable-line no-console
+        console.log('Update available');  
       });
       ipcRenderer.on('auto-update-not-available', () => {
-        console.log('Update not available'); // eslint-disable-line no-console
+        console.log('Update not available');  
       });
       ipcRenderer.on('auto-update-downloaded', () => {
-        console.log('Update downloaded'); // eslint-disable-line no-console
+        console.log('Update downloaded');  
         app.store.dispatch(doAutoUpdate());
       });
     }

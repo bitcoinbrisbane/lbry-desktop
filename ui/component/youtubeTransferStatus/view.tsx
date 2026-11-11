@@ -80,7 +80,7 @@ export default function YoutubeTransferStatus(props: Props) {
     if (hasPendingTransfers) {
       checkYoutubeTransfer();
 
-      let interval = setInterval(() => {
+      const interval = setInterval(() => {
         checkYoutubeTransfer();
         updateUser();
       }, 60 * 1000);

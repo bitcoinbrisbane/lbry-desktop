@@ -36,7 +36,7 @@ function ChannelsFollowingDiscover(props: Props) {
       channelIds = PRIMARY_CONTENT.channelIds;
     }
   }
-  let rowData: Array<ChannelsFollowingItem> = [];
+  const rowData: Array<ChannelsFollowingItem> = [];
   const notChannels = subscribedChannels
     .map(({ uri }) => uri)
     .concat(blockedChannels)

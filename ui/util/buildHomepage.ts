@@ -76,7 +76,7 @@ export const getHomepageRowForCat = (cat: HomepageCat) => {
       orderValue = CS.ORDER_BY_NEW_VALUE;
   }
 
-  let urlParams = new URLSearchParams();
+  const urlParams = new URLSearchParams();
   if (cat.claimType) {
     urlParams.set(CS.CLAIM_TYPE, cat.claimType);
   }
@@ -93,7 +93,7 @@ export const getHomepageRowForCat = (cat: HomepageCat) => {
       limitClaims = getLimitPerChannel(cat.channelIds.length, isChannelType);
     } else if (cat.channelLimit) {
       const limitNumber = Number(cat.channelLimit);
-      // eslint-disable-next-line
+       
       if (limitNumber === limitNumber && limitNumber !== 0) {
         // because javascript and NaN !== NaN
         limitClaims = Math.floor(limitNumber);
@@ -139,7 +139,7 @@ export function GetLinksData(
     return isLargeScreen ? originalSize * (3 / 2) : originalSize;
   }
 
-  let rowData: Array<RowDataItem> = [];
+  const rowData: Array<RowDataItem> = [];
   const individualTagDataItems: Array<RowDataItem> = [];
 
   if (isHomepage && showPersonalizedChannels && subscribedChannels) {

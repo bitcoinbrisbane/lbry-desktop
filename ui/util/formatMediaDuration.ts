@@ -13,7 +13,7 @@ export default function formatMediaDuration(duration = 0, config?: unknown) {
   }
 
   // Normal format
-  let date = new Date(null);
+  const date = new Date(null);
   date.setSeconds(duration);
 
   let timeString = date.toISOString().slice(11, 19);

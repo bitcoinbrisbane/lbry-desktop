@@ -3,7 +3,7 @@ import DateTime from 'component/dateTime';
 
 export function formatClaimPreviewTitle(title: unknown, channelTitle: unknown, date: unknown, mediaDuration: unknown) {
   // Aria-label value for claim preview
-  let ariaDate = date ? DateTime.getTimeAgoStr(date) : null;
+  const ariaDate = date ? DateTime.getTimeAgoStr(date) : null;
   let ariaLabelData = title;
 
   if (mediaDuration) {

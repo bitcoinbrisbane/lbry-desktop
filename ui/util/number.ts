@@ -17,5 +17,5 @@ export function formatNumberWithCommas(num: number, numberOfDigits?: number): st
 
 export function isTrulyANumber(num: number) {
   // typeof NaN = 'number' but NaN !== NaN
-  return typeof num === 'number' && num === num; // eslint-disable-line
+  return typeof num === 'number' && num === num;  
 }

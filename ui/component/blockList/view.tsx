@@ -166,7 +166,7 @@ function SearchList(props: LsbProps) {
       // @ts-expect-error - TS2345 (ts-migration)
       onResultsUpdated(results);
     }
-  }, [results]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [results]);  
 
   return (
     <div className="wunderbar__wrapper">
@@ -209,5 +209,5 @@ function useAuthorMatch(term: unknown, list: unknown) {
           keys: [(item: unknown) => reduceUriToChannelName(item)],
           threshold: matchSorter.rankings.CONTAINS,
         });
-  }, [throttledTerm]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [throttledTerm]);  
 }

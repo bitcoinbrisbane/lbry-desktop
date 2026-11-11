@@ -24,7 +24,7 @@ const isValidServerString = (serverString: unknown) => {
   return (
     (host === 'localhost' || VALID_IPADDRESS_REGEX.test(host) || VALID_HOSTNAME_REGEX.test(host)) &&
     (!path || VALID_ENDPOINT_REGEX.test(path)) &&
-    // eslint-disable-next-line
+     
     (pi === -1 || (port && typeof portInt === 'number' && portInt === portInt))
   ); // NaN !== NaN
 };

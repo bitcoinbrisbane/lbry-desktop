@@ -65,7 +65,7 @@ const sendToRenderer = (channel, ...args) => {
   }
 };
 
-let tray; // eslint-disable-line
+let tray;  
 let daemon;
 let lbryFirst;
 

@@ -91,7 +91,7 @@ export const selectRecommendedContentForUri = createCachedSelector(
     const searchQuery = getSearchQueryString(title.replace(/\//, ' '), options);
     const normalizedSearchQuery = createNormalizedSearchKey(searchQuery);
 
-    let searchResult = searchUrisByQuery[normalizedSearchQuery];
+    const searchResult = searchUrisByQuery[normalizedSearchQuery];
 
     if (searchResult) {
       // Filter from recommended: The same claim and blocked channels
@@ -193,7 +193,7 @@ export const makeSelectWinningUriForQuery = (query: string) => {
     (matureEnabled, pendingClaim, claim1, claim2) => {
       const claim1Mature = claim1 && isClaimNsfw(claim1);
       const claim2Mature = claim2 && isClaimNsfw(claim2);
-      let pendingAmount = pendingClaim && pendingClaim.amount;
+      const pendingAmount = pendingClaim && pendingClaim.amount;
 
       if (!claim1 && !claim2) {
         return undefined;

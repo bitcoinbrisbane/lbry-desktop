@@ -71,7 +71,7 @@ function SocialShare(props: Props) {
   const downloadUrl = `${generateDownloadUrl(name, claimId)}`;
 
   // Tweet params
-  let tweetIntentParams = {
+  const tweetIntentParams = {
     url: shareUrl,
     text: title || claim.name,
     hashtags: 'LBRY',

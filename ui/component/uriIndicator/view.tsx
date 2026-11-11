@@ -87,9 +87,9 @@ class UriIndicator extends React.PureComponent<Props> {
 
       if (children) {
         return (
+          // @ts-expect-error - TS2322 (ts-migration)
           <Button
             aria-hidden={!focusable}
-            // @ts-expect-error - TS2322 (ts-migration)
             tabIndex={focusable ? 0 : -1}
             className={className}
             target={external ? '_blank' : undefined}
@@ -100,8 +100,8 @@ class UriIndicator extends React.PureComponent<Props> {
         );
       } else {
         return (
+          // @ts-expect-error - TS2322 (ts-migration)
           <Button
-            // @ts-expect-error - TS2322 (ts-migration)
             className={classnames(className, 'button--uri-indicator')}
             navigate={channelLink}
             target={external ? '_blank' : undefined}

@@ -97,8 +97,8 @@ export default (appState: unknown) => {
 
   // is it a lbry://? pointing to an app page
   if (deepLinkingURI.includes(lbryProtoQ)) {
-    let path = deepLinkingURI.slice(lbryProtoQ.length);
-    let page = path.indexOf('?') >= 0 ? path.substring(0, path.indexOf('?')) : path;
+    const path = deepLinkingURI.slice(lbryProtoQ.length);
+    const page = path.indexOf('?') >= 0 ? path.substring(0, path.indexOf('?')) : path;
     if (Object.values(PAGES).includes(page)) {
       deepLinkingURI = deepLinkingURI.replace(lbryProtoQ, '#/$/');
     } else {

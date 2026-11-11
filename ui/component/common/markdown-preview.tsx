@@ -167,7 +167,7 @@ export default React.memo<MarkdownProps>(function MarkdownPreview(props: Markdow
         // Let the browser try to create an iframe to see if the markup is valid
         let lbrySrc;
         try {
-          let p = parse(iframeHtml);
+          const p = parse(iframeHtml);
           const tag = p.getElementsByTagName('iframe');
           const s = tag[0];
           lbrySrc = s && s.getAttribute('src');

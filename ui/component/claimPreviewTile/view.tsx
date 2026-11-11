@@ -120,7 +120,7 @@ function ClaimPreviewTile(props: Props) {
   const channelTitle = signingChannel && ((signingChannel.value && signingChannel.value.title) || signingChannel.name);
 
   // Aria-label value for claim preview
-  let ariaLabelData = isChannel ? title : formatClaimPreviewTitle(title, channelTitle, date, mediaDuration);
+  const ariaLabelData = isChannel ? title : formatClaimPreviewTitle(title, channelTitle, date, mediaDuration);
 
   function handleClick(e: unknown) {
     if (navigateUrl) {
@@ -178,7 +178,7 @@ function ClaimPreviewTile(props: Props) {
     );
   }
 
-  let liveProperty = null;
+  const liveProperty = null;
 
   return (
     <li

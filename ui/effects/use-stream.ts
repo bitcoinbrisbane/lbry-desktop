@@ -17,7 +17,7 @@ export default function useStream(url: unknown) {
     if (url && isMounted.current) {
       https.get(url, response => {
         if (isMounted && response.statusCode >= 200 && response.statusCode < 300) {
-          let chunks: unknown = [];
+          const chunks: unknown = [];
           // Handle stream chunk recived
           response.on('data', function(chunk) {
             if (isMounted.current) {

@@ -1,6 +1,6 @@
 //@ts-nocheck
 // @if TARGET='app'
-let fs = require('fs');
+const fs = require('fs');
 // @endif
 
 const isProduction = process.env.NODE_ENV === 'production';

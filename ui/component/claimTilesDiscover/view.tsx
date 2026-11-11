@@ -139,7 +139,7 @@ export default React.memo<Props>(ClaimTilesDiscover, areEqual);
 
 function trace(key: unknown, value: unknown) {
   // @if process.env.DEBUG_TILE_RENDER
-  console.log(`[claimTilesDiscover] ${key}: ${value}`); // eslint-disable-line no-console
+  console.log(`[claimTilesDiscover] ${key}: ${value}`);  
   // @endif
 }
 

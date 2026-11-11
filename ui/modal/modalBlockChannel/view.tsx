@@ -101,7 +101,7 @@ export default function ModalBlockChannel(props: Props) {
     if (!isTimeoutAvail && blockType === BLOCK.TIMEOUT) {
       setBlockType(BLOCK.PERMANENT);
     }
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  }, []);  
 
   // 'timeoutInput' to 'timeoutSec' conversion.
   React.useEffect(() => {

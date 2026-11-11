@@ -22,7 +22,7 @@ export default function usePersistedState(key: unknown, firstTimeDefault: unknow
     localStorageAvailable = false;
   }
   if (key && localStorageAvailable) {
-    let item = localStorage.getItem(key);
+    const item = localStorage.getItem(key);
 
     if (item) {
       let parsedItem;

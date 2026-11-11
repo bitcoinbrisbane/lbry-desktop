@@ -1,4 +1,3 @@
-// @ts-expect-error - TS2882 (ts-migration)
 import 'scss/component/_emote-selector.scss';
 import { EMOTES_48px as EMOTES } from 'constants/emotes';
 import * as ICONS from 'constants/icons';
@@ -53,9 +52,9 @@ export default function EmoteSelector(props: Props) {
               const emoteName = emote.name.toLowerCase();
 
               return (
+                // @ts-expect-error - TS2322 (ts-migration)
                 <Button
                   key={emoteName}
-                  // @ts-expect-error - TS2322 (ts-migration)
                   title={emoteName}
                   button="alt"
                   className="button--file-action"

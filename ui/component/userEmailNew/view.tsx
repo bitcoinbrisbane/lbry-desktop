@@ -68,7 +68,7 @@ function UserEmailNew(props: Props) {
   function handleChangeToSignIn(additionalParams: unknown) {
     clearEmailEntry();
 
-    let url = `/$/${PAGES.AUTH_SIGNIN}`;
+    const url = `/$/${PAGES.AUTH_SIGNIN}`;
     const urlParams = new URLSearchParams(location.search);
 
     urlParams.delete('email');

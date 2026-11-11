@@ -140,8 +140,8 @@ export default function CommentReactions(props: Props) {
       />
 
       {!shouldHide && ENABLE_CREATOR_REACTIONS && (canCreatorReact || creatorLiked) && (
+        // @ts-expect-error - TS2322 (ts-migration)
         <Button
-          // @ts-expect-error - TS2322 (ts-migration)
           disabled={!canCreatorReact || !claimIsMine}
           title={claimIsMine ? __('You loved this') : __('Creator loved this')}
           icon={creatorLiked ? ICONS.CREATOR_LIKE : ICONS.SUBSCRIBE}

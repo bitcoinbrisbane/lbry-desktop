@@ -148,7 +148,7 @@ export default function CommentList(props: Props) {
       }
       setPage(1);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+     
   }, [page, uri, resetComments]); // 'claim' is derived from 'uri'
 
   // Fetch top-level comments
@@ -204,7 +204,7 @@ export default function CommentList(props: Props) {
 // @ts-expect-error - TS2339 - Property 'pendingLinkedCommentScroll' does not exist on type 'Window & typeof globalThis'.
       delete window.pendingLinkedCommentScroll;
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+     
   }, []);
 
   // Infinite scroll

@@ -106,7 +106,7 @@ export default function SettingSystem(props: Props) {
       }
       findFFmpeg();
     }
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  }, []);  
 
   // Update storedPassword state
   React.useEffect(() => {
@@ -116,7 +116,7 @@ export default function SettingSystem(props: Props) {
         setStoredPassword(true);
       }
     });
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  }, []);  
 
   return <>
     <div className="card__title-section">

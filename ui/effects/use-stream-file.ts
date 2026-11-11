@@ -14,7 +14,7 @@ export default function useFileStream(fileStream: unknown) {
 
   React.useEffect(() => {
     if (fileStream && isMounted.current) {
-      let chunks: unknown = [];
+      const chunks: unknown = [];
       const stream = fileStream();
       // Handle steam chunk recived
       stream.on('data', chunk => {

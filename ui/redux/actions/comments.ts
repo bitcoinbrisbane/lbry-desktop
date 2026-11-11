@@ -70,7 +70,7 @@ const ERR_MAP: CommentronErrorMap = {
 
 function devToast(dispatch: unknown, msg: unknown) {
   if (isDev) {
-    console.error(msg); // eslint-disable-line
+    console.error(msg);  
 // @ts-expect-error - TS2349 - This expression is not callable.
     dispatch(doToast({ isError: true, message: `DEV: ${msg}` }));
   }
@@ -215,19 +215,19 @@ export function doCommentListOwn(
     const state = getState();
     const myChannelClaims = selectMyChannelClaims(state);
     if (!myChannelClaims) {
-      console.error('Failed to fetch channel list.'); // eslint-disable-line
+      console.error('Failed to fetch channel list.');  
       return;
     }
 
     const channelClaim = myChannelClaims.find((x) => x.claim_id === channelId);
     if (!channelClaim) {
-      console.error('You do not own this channel.'); // eslint-disable-line
+      console.error('You do not own this channel.');  
       return;
     }
 
     const channelSignature = await channelSignName(channelClaim.claim_id, channelClaim.name);
     if (!channelSignature) {
-      console.error('Failed to sign channel name.'); // eslint-disable-line
+      console.error('Failed to sign channel name.');  
       return;
     }
 
@@ -344,7 +344,7 @@ export function doCommentById(commentId: string, toastIfNotFound: boolean = true
 export function doCommentReset(claimId: string) {
   return (dispatch: Dispatch) => {
     if (!claimId) {
-      console.error(`Failed to reset comments`); //eslint-disable-line
+      console.error(`Failed to reset comments`);  
       return;
     }
 
@@ -364,7 +364,7 @@ export function doSuperChatList(uri: string) {
     const claimId = claim ? claim.claim_id : null;
 
     if (!claimId) {
-      console.error('No claimId found for uri: ', uri); //eslint-disable-line
+      console.error('No claimId found for uri: ', uri);  
       return;
     }
 
@@ -450,7 +450,7 @@ export function doCommentReact(commentId: string, type: string) {
     const notification = makeSelectNotificationForCommentId(commentId)(state);
 
     if (!activeChannelClaim) {
-      console.error('Unable to react to comment. No activeChannel is set.'); // eslint-disable-line
+      console.error('Unable to react to comment. No activeChannel is set.');  
       return;
     }
 
@@ -578,7 +578,7 @@ export function doCommentCreate(
     const activeChannelClaim = selectActiveChannelClaim(state);
 
     if (!activeChannelClaim) {
-      console.error('Unable to create comment. No activeChannel is set.'); // eslint-disable-line
+      console.error('Unable to create comment. No activeChannel is set.');  
       return;
     }
 
@@ -643,7 +643,7 @@ export function doCommentPin(commentId: string, claimId: string, remove: boolean
     const activeChannel = selectActiveChannelClaim(state);
 
     if (!activeChannel) {
-      console.error('Unable to pin comment. No activeChannel is set.'); // eslint-disable-line
+      console.error('Unable to pin comment. No activeChannel is set.');  
       return;
     }
 
@@ -1184,10 +1184,10 @@ export function doFetchModBlockedList() {
             )
         )
           .then(async (res) => {
-            let personalBlockList: unknown = [];
-            let adminBlockList: unknown = [];
-            let moderatorBlockList: unknown = [];
-            let moderatorBlockListDelegatorsMap: Record<string, any> = {};
+            const personalBlockList: unknown = [];
+            const adminBlockList: unknown = [];
+            const moderatorBlockList: unknown = [];
+            const moderatorBlockListDelegatorsMap: Record<string, any> = {};
 
             // These should just be part of the block list above, but it is
             // separated for now because there are too many clients that we need
@@ -1701,7 +1701,7 @@ export const doFetchBlockedWords = () => {
       type: ACTIONS.COMMENT_FETCH_BLOCKED_WORDS_STARTED,
     });
 
-    let channelSignatures: unknown = [];
+    const channelSignatures: unknown = [];
     if (myChannels) {
       for (const channelClaim of myChannels) {
         try {

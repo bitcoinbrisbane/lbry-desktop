@@ -1,4 +1,3 @@
-// @ts-expect-error - TS2882 (ts-migration)
 import 'scss/component/_comment-create.scss';
 
 import { buildValidSticker } from 'util/comments';
@@ -343,7 +342,7 @@ export function CommentCreate(props: Props) {
     if (!channelSettings && channelId) {
       doFetchCreatorSettings(channelId);
     }
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  }, []);  
 
   // Notifications: Fetch top-level comments to identify if it has been deleted and can reply to it
   React.useEffect(() => {

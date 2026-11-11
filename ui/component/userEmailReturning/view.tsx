@@ -56,7 +56,7 @@ function UserEmailReturning(props: Props) {
 
   function handleChangeToSignIn() {
     doClearEmailEntry();
-    let url = `/$/${PAGES.AUTH}`;
+    const url = `/$/${PAGES.AUTH}`;
     const urlParams = new URLSearchParams(location.search);
 
     urlParams.delete('email_exists');

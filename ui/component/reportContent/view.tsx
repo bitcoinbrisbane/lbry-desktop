@@ -194,7 +194,7 @@ export default function ReportContent(props: Props) {
   }
 
   function updateInput(field: string, value: any) {
-    let newInput = input;
+    const newInput = input;
 
     if (isDev && newInput[field] === undefined) {
       throw new Error('Unexpected field: ' + field);

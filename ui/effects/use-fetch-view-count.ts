@@ -18,6 +18,6 @@ export default function useFetchViewCount(
         setFetchedUris([...fetchedUris, ...urisToFetch]);
       }
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+     
   }, [uris]);
 }

@@ -43,7 +43,7 @@ const select = (state: unknown, props: unknown) => {
   // Without this it will try to render lbry://search
   if (search && search.startsWith('?q=cache:')) {
     const googleCacheRegex = new RegExp(`(https://${DOMAIN}/)([^+]*)`);
-    const [x, y, googleCachedUrl] = search.match(googleCacheRegex); // eslint-disable-line
+    const [x, y, googleCachedUrl] = search.match(googleCacheRegex);  
     if (googleCachedUrl) {
       const actualUrl = decodeURIComponent(googleCachedUrl);
       if (actualUrl) {

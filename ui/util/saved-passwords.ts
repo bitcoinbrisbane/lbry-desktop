@@ -11,7 +11,7 @@ let sessionPassword;
 function setCookie(name: unknown, value: unknown, expirationDaysOnWeb: unknown) {
   let expires = '';
   if (expirationDaysOnWeb) {
-    let date = new Date();
+    const date = new Date();
     date.setTime(date.getTime() + expirationDaysOnWeb * 24 * 60 * 60 * 1000);
     // If on PC, set to not expire (max)
     expires = `expires=${maxExpiration};`;
@@ -35,7 +35,7 @@ function getCookie(name: unknown) {
   const nameEQ = name + '=';
   const cookies = document.cookie.split(';');
 
-  for (var i = 0; i < cookies.length; i++) {
+  for (let i = 0; i < cookies.length; i++) {
     let cookie = cookies[i];
     while (cookie.charAt(0) === ' ') {
       cookie = cookie.substring(1, cookie.length);

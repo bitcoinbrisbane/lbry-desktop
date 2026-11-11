@@ -28,7 +28,7 @@ type SearchOptions = {
 
 // Every search goes through here. It takes a Lighthouse query string (util/query-params) and
 // sends it to whichever server Settings > System picks: Lighthouse, or lbry-search over GraphQL.
-let lighthouse = {
+const lighthouse = {
   CONNECTION_STRING: SEARCH_SERVER_API,
   provider: SEARCH_PROVIDERS.LIGHTHOUSE,
   lbrySearchUrl: LBRY_SEARCH_API,

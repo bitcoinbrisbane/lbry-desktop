@@ -47,7 +47,7 @@ export default function NotificationsPage(props: Props) {
   // Fetch reacts
   React.useEffect(() => {
     if ((!fetching || initialFetchDone) && activeChannel) {
-      let idsForReactionFetch: unknown = [];
+      const idsForReactionFetch: unknown = [];
       list.map((notification) => {
         const { notification_rule, notification_parameters } = notification;
         const isComment =

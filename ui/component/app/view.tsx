@@ -215,7 +215,7 @@ function App(props: Props) {
     } else if (referredRewardAvailable && sanitizedReferrerParam) {
       setReferrer(sanitizedReferrerParam, false);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+     
   }, [sanitizedReferrerParam, isRewardApproved, referredRewardAvailable]);
 
   useEffect(() => {
@@ -269,7 +269,7 @@ function App(props: Props) {
         document.documentElement.dir = LANGUAGES[language][2];
       }
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+     
   }, [language, languages]);
 
   useEffect(() => {
@@ -324,7 +324,7 @@ function App(props: Props) {
     if (syncError && isAuthenticated && !pathname.includes(PAGES.AUTH_WALLET_PASSWORD) && !currentModal) {
       history.push(`/$/${PAGES.AUTH_WALLET_PASSWORD}?redirect=${pathname}`);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+     
   }, [syncError, pathname, isAuthenticated]);
 
   // Keep this at the end to ensure initial setup effects are run first

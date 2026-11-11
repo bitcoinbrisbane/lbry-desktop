@@ -146,7 +146,7 @@ export function openSnippetMenu(codeMirror: unknown, event: unknown) {
 
 export function openClaimPreviewMenu(claim: unknown, event: unknown) {
   // @if TARGET='app'
-  let templates: unknown = [];
+  const templates: unknown = [];
 
   if (claim) {
     const shareLink = convertToShareLink(claim.canonical_url || claim.permanent_url);

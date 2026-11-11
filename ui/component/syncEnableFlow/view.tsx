@@ -65,18 +65,18 @@ function SyncEnableFlow(props: Props) {
   };
 
   const makeMergedPrefs = (alt: unknown, base: unknown) => {
-    let finalPrefs = base;
+    const finalPrefs = base;
 // @ts-expect-error - TS2339 - Property 'value' does not exist on type 'unknown'.
-    let baseData = base.value;
+    const baseData = base.value;
 // @ts-expect-error - TS2339 - Property 'value' does not exist on type 'unknown'.
-    let altData = alt.value;
+    const altData = alt.value;
     if (!altData) {
       return base;
     }
 
-    let mergedBlockListSet = new Set(baseData.blocked || []);
-    let mergedSubscriptionsSet = new Set(baseData.subscriptions || []);
-    let mergedTagsSet = new Set(baseData.tags || []);
+    const mergedBlockListSet = new Set(baseData.blocked || []);
+    const mergedSubscriptionsSet = new Set(baseData.subscriptions || []);
+    const mergedTagsSet = new Set(baseData.tags || []);
 
     const altBlocklist = altData.blocked || [];
     const altSubscriptions = altData.subscriptions || [];

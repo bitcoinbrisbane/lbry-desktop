@@ -68,7 +68,7 @@ class WalletBackup extends React.PureComponent<Props, State> {
     try {
       zip.addLocalFolder(lbryumWalletDir);
     } catch (err: any) {
-      console.error(err); // eslint-disable-line no-console
+      console.error(err);  
       this.showErrorMessage(__('The wallet folder could not be added to the zip archive.'));
       return;
     }
@@ -76,7 +76,7 @@ class WalletBackup extends React.PureComponent<Props, State> {
     try {
       zip.writeZip(outputPath);
     } catch (err: any) {
-      console.error(err); // eslint-disable-line no-console
+      console.error(err);  
       this.showErrorMessage(__('There was a problem writing the zip archive to disk.'));
       return;
     }

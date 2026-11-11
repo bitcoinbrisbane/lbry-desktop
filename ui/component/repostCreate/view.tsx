@@ -11,7 +11,6 @@ import { creditsToString } from 'util/format-credits';
 import analytics from 'analytics';
 import LbcSymbol from 'component/common/lbc-symbol';
 import ClaimPreview from 'component/claimPreview';
-// @ts-expect-error - TS2305 (ts-migration)
 import { URL as SITE_URL, URL_LOCAL, URL_DEV } from 'config';
 import HelpLink from 'component/common/help-link';
 import WalletSpendableBalanceHelp from 'component/walletSpendableBalanceHelp';
@@ -139,7 +138,7 @@ function RepostCreate(props: Props) {
       if (includesOdysee) prefix = ODYSEE_PREFIX;
 
 // @ts-expect-error - TS2339 - Property 'slice' does not exist on type 'unknown'.
-      let query = (value && value.slice(prefix.length).replace(/:/g, '#')) || '';
+      const query = (value && value.slice(prefix.length).replace(/:/g, '#')) || '';
       try {
         const lbryUrl = `lbry://${query}`;
         parseURI(lbryUrl);

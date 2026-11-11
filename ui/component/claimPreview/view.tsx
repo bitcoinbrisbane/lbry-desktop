@@ -215,10 +215,10 @@ const ClaimPreview = forwardRef<any, Record<any, any>>((props: Props, ref: any) 
   }
 
   // Aria-label value for claim preview
-  let ariaLabelData = isChannelUri ? title : formatClaimPreviewTitle(title, channelTitle, date, mediaDuration);
+  const ariaLabelData = isChannelUri ? title : formatClaimPreviewTitle(title, channelTitle, date, mediaDuration);
 
-  let navigateUrl = formatLbryUrlForWeb((claim && claim.canonical_url) || uri || '/');
-  let navigateSearch = new URLSearchParams();
+  const navigateUrl = formatLbryUrlForWeb((claim && claim.canonical_url) || uri || '/');
+  const navigateSearch = new URLSearchParams();
   if (listId) {
     navigateSearch.set(COLLECTIONS_CONSTS.COLLECTION_ID, listId);
   }
@@ -325,8 +325,8 @@ const ClaimPreview = forwardRef<any, Record<any, any>>((props: Props, ref: any) 
   }
 
   return (
+    // @ts-expect-error - TS2322 (ts-migration)
     <WrapperElement
-      // @ts-expect-error - TS2322 (ts-migration)
       ref={ref}
       role="link"
       onClick={pending || type === 'inline' ? undefined : handleOnClick}

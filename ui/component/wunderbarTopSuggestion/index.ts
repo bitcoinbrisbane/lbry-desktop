@@ -14,7 +14,7 @@ import { PREFERENCE_EMBED } from 'constants/tags';
 const select = (state: unknown, props: unknown) => {
   const uriFromQuery = `lbry://${props.query}`;
 
-  let uris = [uriFromQuery];
+  const uris = [uriFromQuery];
   try {
     const { isChannel } = parseURI(uriFromQuery);
 

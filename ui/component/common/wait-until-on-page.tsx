@@ -57,7 +57,7 @@ export default function WaitUntilOnPage(props: Props) {
         setShouldRender(true);
       }
     }, 500);
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  }, []);  
 
   // Handles "element scrolled into viewport".
   React.useEffect(() => {

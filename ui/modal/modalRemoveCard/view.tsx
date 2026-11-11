@@ -5,7 +5,7 @@ import Button from 'component/button';
 import * as ICONS from 'constants/icons';
 import { Lbryio } from 'lbryinc';
 import { getStripeEnvironment } from 'util/stripe';
-let stripeEnvironment = getStripeEnvironment();
+const stripeEnvironment = getStripeEnvironment();
 
 type Props = {
   closeModal: () => void,

@@ -46,7 +46,7 @@ function locateMention(value: unknown, fromIndex: unknown) {
 
 // Find claim url
 function locateURI(value: unknown, fromIndex: unknown) {
-  var index = value.indexOf(protocol, fromIndex);
+  const index = value.indexOf(protocol, fromIndex);
 
   // Skip invalid uri
   if (index > 0 && invalidRegex.test(value.charAt(index - 1))) {

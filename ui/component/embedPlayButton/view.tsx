@@ -76,7 +76,7 @@ export default function EmbedPlayButton(props: Props) {
       push(formattedUrl);
     } else {
       doPlayUri(uri, undefined, undefined, (fileInfo) => {
-        let playingOptions = { uri, pathname, source: undefined, commentId: undefined };
+        const playingOptions = { uri, pathname, source: undefined, commentId: undefined };
         if (parentCommentId) {
           playingOptions.source = 'comment';
           playingOptions.commentId = parentCommentId;

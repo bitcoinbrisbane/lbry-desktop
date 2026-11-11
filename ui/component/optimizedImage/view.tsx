@@ -101,7 +101,7 @@ function OptimizedImage(props: Props) {
       setOptimizedSrc(src);
     }
     // We only want to run this on (1) initial mount and (2) 'src' change. Nothing else.
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+     
   }, [src]);
 
   if (!src) {

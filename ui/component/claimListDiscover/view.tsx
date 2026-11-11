@@ -237,10 +237,10 @@ function ClaimListDiscover(props: Props) {
     if (historyAction !== 'POP') {
       setOrderParamEntry(orderParam);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+     
   }, [historyAction, setOrderParamEntry]);
 
-  let options: {
+  const options: {
     page_size: number,
     page: number,
     no_totals: boolean,
@@ -487,12 +487,12 @@ function ClaimListDiscover(props: Props) {
     // Compare every field except for 'page' and 'release_time'.
     // There might be better ways to achieve this.
 // @ts-expect-error - TS2698 - Spread types may only be created from object types.
-    let tmpPrevOptions = { ...prevOptions };
+    const tmpPrevOptions = { ...prevOptions };
     tmpPrevOptions.page = -1;
     tmpPrevOptions.release_time = '';
 
 // @ts-expect-error - TS2698 - Spread types may only be created from object types.
-    let tmpOptions = { ...options };
+    const tmpOptions = { ...options };
     tmpOptions.page = -1;
     tmpOptions.release_time = '';
 

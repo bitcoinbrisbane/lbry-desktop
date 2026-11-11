@@ -109,11 +109,11 @@ export default function ClaimList(props: Props) {
 
   if (maxClaimRender) tileUris = tileUris.slice(0, maxClaimRender);
 
-  let sortedUris = (urisLength > 0 && (currentSort === SORT_NEW ? tileUris : tileUris.slice().reverse())) || [];
+  const sortedUris = (urisLength > 0 && (currentSort === SORT_NEW ? tileUris : tileUris.slice().reverse())) || [];
 
   React.useEffect(() => {
     if (typeof loadedCallback === 'function') loadedCallback(totalLength);
-  }, [totalLength]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [totalLength]);  
 
   const noResultMsg = searchInLanguage
     ? __('No results. Contents may be hidden by the Language filter.')

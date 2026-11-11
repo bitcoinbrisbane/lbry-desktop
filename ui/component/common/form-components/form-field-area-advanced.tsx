@@ -1,4 +1,3 @@
-// @ts-expect-error - TS2882 (ts-migration)
 import 'easymde/dist/easymde.min.css';
 import { FF_MAX_CHARS_DEFAULT } from 'constants/form-field';
 import { openEditorMenu, stopContextMenu } from 'util/context-menu';
@@ -106,8 +105,8 @@ export class FormFieldAreaAdvanced extends React.PureComponent<Props> {
 // @ts-expect-error - TS2339 - Property 'codemirror' does not exist on type 'unknown'.
             editor.codemirror.on('beforeChange', (instance, changes) => {
               if (textAreaMaxLength && changes.update) {
-                var str = changes.text.join('\n');
-                var delta = str.length - (instance.indexFromPos(changes.to) - instance.indexFromPos(changes.from));
+                let str = changes.text.join('\n');
+                let delta = str.length - (instance.indexFromPos(changes.to) - instance.indexFromPos(changes.from));
 
                 if (delta <= 0) return;
 

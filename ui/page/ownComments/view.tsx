@@ -107,14 +107,14 @@ export default function OwnComments(props: Props) {
       doCommentReset(activeChannelId);
       setPage(1);
     }
-  }, [page, activeChannelId]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [page, activeChannelId]);  
 
   // Fetch own comments
   React.useEffect(() => {
     if (page !== 0 && activeChannelId) {
       doCommentListOwn(activeChannelId, page, COMMENT_PAGE_SIZE_TOP_LEVEL);
     }
-  }, [page]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [page]);  
 
   // Infinite scroll
   React.useEffect(() => {

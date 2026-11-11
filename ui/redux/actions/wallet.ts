@@ -171,7 +171,7 @@ export function doFetchUtxoCounts() {
       type: ACTIONS.FETCH_UTXO_COUNT_STARTED,
     });
 
-    let resultSets = await Promise.all([
+    const resultSets = await Promise.all([
       Lbry.txo_list({ type: 'other', is_not_spent: true, page: 1, page_size: 1 }),
       Lbry.txo_list({ type: 'support', is_not_spent: true, page: 1, page_size: 1 }),
     ]);

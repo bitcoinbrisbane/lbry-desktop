@@ -86,7 +86,7 @@ export default function Notification(props: Props) {
   }
 
   let notificationLink = formatLbryUrlForWeb(notificationTarget);
-  let urlParams = new URLSearchParams();
+  const urlParams = new URLSearchParams();
   if (isCommentNotification && notification_parameters.dynamic.hash) {
     urlParams.append('lc', notification_parameters.dynamic.hash);
   }

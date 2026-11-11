@@ -1,6 +1,6 @@
 //@ts-nocheck
-/* eslint-disable no-undef */
-/* eslint-disable react/prop-types */
+ 
+ 
 import React from 'react';
 import Button from 'component/button';
 
@@ -181,5 +181,5 @@ class CardVerify extends React.Component {
 }
 
 export default CardVerify;
-/* eslint-enable no-undef */
-/* eslint-enable react/prop-types */
+ 
+ 

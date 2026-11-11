@@ -1,4 +1,3 @@
-// @ts-expect-error - TS2882 (ts-migration)
 import 'scss/component/_comment-badge.scss';
 
 import classnames from 'classnames';

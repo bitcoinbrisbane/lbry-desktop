@@ -102,7 +102,7 @@ export default function SettingContent(props: Props) {
                 name="hide_reposts"
                 onChange={(e) => {
                   if (isAuthenticated) {
-                    let param = e.target.checked ? { add: 'noreposts' } : { remove: 'noreposts' };
+                    const param = e.target.checked ? { add: 'noreposts' } : { remove: 'noreposts' };
                     // @ts-expect-error - TS2339 (ts-migration)
                     Lbryio.call('user_tag', 'edit', param);
                   }

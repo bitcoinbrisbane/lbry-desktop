@@ -7,7 +7,7 @@ import { SITE_HELP_EMAIL } from 'config';
 type Props = Record<any, any>;
 
 export default function SyncFatalError(props: Props) {
-  let downTime = false;
+  const downTime = false;
 
   return (
     <div className="main--empty">

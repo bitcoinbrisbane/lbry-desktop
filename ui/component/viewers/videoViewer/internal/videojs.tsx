@@ -3,7 +3,6 @@ import Button from 'component/button';
 import * as ICONS from 'constants/icons';
 import classnames from 'classnames';
 import videojs from 'video.js';
-// @ts-expect-error - TS2882 (ts-migration)
 import 'video.js/dist/alt/video-js-cdn.min.css';
 import eventTracking from 'videojs-event-tracking';
 import * as OVERLAY from './overlays';

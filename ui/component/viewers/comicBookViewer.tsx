@@ -5,7 +5,6 @@ import LoadingScreen from 'component/common/loading-screen';
 import useFileStream from 'effects/use-stream-file';
 
 // Import default styles for Villain
-// @ts-expect-error - TS2882 (ts-migration)
 import 'villain-react/dist/style.css';
 
 type Props = {

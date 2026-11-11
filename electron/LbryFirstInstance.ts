@@ -23,7 +23,7 @@ export default class LbryFirstInstance {
   }
 
   launch() {
-    let flags = ['serve'];
+    const flags = ['serve'];
     console.log(`LbryFirst: ${LbryFirstInstance.lbryFirstPath}`);
     this.subprocess = spawn(LbryFirstInstance.lbryFirstPath, flags);
     this.subprocess.stdout.on('data', data => console.log(`LbryFirst: ${data}`));

@@ -1,5 +1,5 @@
 //@ts-nocheck
-/* eslint-disable */
+ 
 import videojs from 'video.js';
 import { version as VERSION } from './package.json';
 import ConcreteButton from './ConcreteButton';
@@ -264,4 +264,4 @@ registerPlugin('hlsQualitySelector', hlsQualitySelector);
 hlsQualitySelector.VERSION = VERSION;
 
 export default hlsQualitySelector;
-/* eslint-enable */
+ 

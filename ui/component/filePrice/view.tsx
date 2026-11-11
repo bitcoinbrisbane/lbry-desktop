@@ -1,4 +1,3 @@
-// @ts-expect-error - TS2882 (ts-migration)
 import 'scss/component/_file-price.scss';
 import * as ICONS from 'constants/icons';
 import classnames from 'classnames';

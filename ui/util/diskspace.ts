@@ -54,7 +54,7 @@ export const diskSpaceWindows = (path: unknown) => {
       const driveLine = stdoutLines.find((line) => line.startsWith(pathDrive));
       // Parse the values in each column by filtering out the
       // empty spaces.
-      // eslint-disable-next-line no-unused-vars
+       
       const [drive, freeSpace, totalSize] = driveLine.split(' ').filter((x) => x);
 
       resolve({

@@ -99,7 +99,7 @@ export function doResolveUris(
                   }
                 }
               }
-              let result: Record<string, any> = {};
+              const result: Record<string, any> = {};
               if (uriResolveInfo.value_type === 'channel') {
                 result.channel = uriResolveInfo;
                 result.claimsInChannel = uriResolveInfo.meta.claims_in_channel;

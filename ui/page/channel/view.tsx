@@ -176,7 +176,7 @@ function ChannelPage(props: Props) {
   }
 
   function onTabChange(newTabIndex: unknown) {
-    let url = formatLbryUrlForWeb(uri);
+    const url = formatLbryUrlForWeb(uri);
     let search = '?';
 
     if (newTabIndex === 0) {

@@ -8,7 +8,7 @@ import useLazyLoading from 'effects/use-lazy-loading';
 const FreezeframeWrapper = (props: unknown) => {
   const imgRef = React.useRef();
   const freezeframe = React.useRef();
-  // eslint-disable-next-line
+   
   const { src, className, children } = props;
 
   const srcLoaded = useLazyLoading(imgRef);

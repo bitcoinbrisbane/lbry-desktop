@@ -96,7 +96,7 @@ export const generateLbryWebUrl = (lbryUrl: unknown) => {
 };
 
 export const generateEncodedLbryURL = (domain: unknown, lbryWebUrl: unknown, includeStartTime: unknown, startTime: unknown, listId: unknown) => {
-  let urlParams = new URLSearchParams();
+  const urlParams = new URLSearchParams();
 
   if (includeStartTime) {
     urlParams.append('t', startTime.toString());
@@ -119,7 +119,7 @@ export const generateShareUrl = (
   startTime: unknown,
   listId: unknown
 ) => {
-  let urlParams = new URLSearchParams();
+  const urlParams = new URLSearchParams();
   if (referralCode && rewardsApproved) {
     urlParams.append('r', referralCode);
   }
@@ -136,7 +136,7 @@ export const generateShareUrl = (
 
   const { streamName, streamClaimId, channelName, channelClaimId } = parseURI(lbryUrl);
 
-  let uriParts = {
+  const uriParts = {
     ...(streamName ? { streamName: encodeWithSpecialCharEncode(streamName) } : {}),
     ...(streamClaimId ? { streamClaimId } : {}),
     ...(channelName ? { channelName: encodeWithSpecialCharEncode(channelName) } : {}),

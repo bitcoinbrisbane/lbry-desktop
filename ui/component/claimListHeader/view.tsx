@@ -104,7 +104,7 @@ function ClaimListHeader(props: Props) {
     if (action !== 'POP' && isFiltered()) {
       setExpanded(true);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+     
   }, []);
 
   let orderParam = orderBy || urlParams.get(CS.ORDER_BY_KEY) || defaultOrderBy;
@@ -127,7 +127,7 @@ function ClaimListHeader(props: Props) {
     if (action !== 'POP') {
       setOrderParamEntry(orderParam);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+     
   }, []);
 
   function handleChange(change: unknown) {

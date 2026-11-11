@@ -78,7 +78,7 @@ export const doFetchItemsInCollections = (
   4) Build the collection objects and update collections reducer
   5) Update redux claims reducer
    */
-  let state = getState();
+  const state = getState();
   const { collectionIds, pageSize } = resolveItemsOptions;
 
   dispatch({
@@ -179,7 +179,7 @@ export const doFetchItemsInCollections = (
       // Flow has terrible Object.entries support
       // https://github.com/facebook/flow/issues/2221
       if (uriResolveInfo) {
-        let result: Record<string, any> = {};
+        const result: Record<string, any> = {};
         if (uriResolveInfo.value_type === 'channel') {
           result.channel = uriResolveInfo;
           result.claimsInChannel = uriResolveInfo.meta.claims_in_channel;
@@ -234,7 +234,7 @@ export const doFetchItemsInCollections = (
       const valueTypes = new Set();
       const streamTypes = new Set();
 
-      let newItems: unknown = [];
+      const newItems: unknown = [];
       let isPlaylist;
 
       if (collectionItems) {

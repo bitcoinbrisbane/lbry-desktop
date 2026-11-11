@@ -28,7 +28,7 @@ export default function SettingAccount(props: Props) {
         setStoredPassword(true);
       }
     });
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  }, []);  
 
   return (
     <>

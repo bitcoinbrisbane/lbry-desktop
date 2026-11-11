@@ -39,7 +39,7 @@ export default handleActions(
       const { knownTags } = state;
       const { name } = action.data;
 
-      let newKnownTags = { ...knownTags };
+      const newKnownTags = { ...knownTags };
       newKnownTags[name] = { name };
 
       return {
@@ -52,7 +52,7 @@ export default handleActions(
       const { knownTags, followedTags } = state;
       const { name } = action.data;
 
-      let newKnownTags = { ...knownTags };
+      const newKnownTags = { ...knownTags };
       delete newKnownTags[name];
       const newFollowedTags = followedTags.filter((tag) => tag !== name);
 

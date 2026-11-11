@@ -3,7 +3,6 @@ import * as ACTIONS from 'constants/action_types';
 import { Lbryio } from 'lbryinc';
 import { selectClaimForUri } from 'redux/selectors/claims';
 
-// eslint-disable-next-line import/prefer-default-export
 export function doFetchCostInfoForUri(uri: unknown) {
   return (dispatch: unknown, getState: unknown) => {
     const state = getState();

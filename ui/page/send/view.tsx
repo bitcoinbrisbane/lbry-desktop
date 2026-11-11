@@ -2,7 +2,6 @@ import React from 'react';
 import Page from 'component/page';
 import LbcSymbol from 'component/common/lbc-symbol';
 import WalletSend from 'component/walletSend';
-// @ts-expect-error - TS2305 (ts-migration)
 import { URL as SITE_URL, URL_LOCAL, URL_DEV } from 'config';
 import { parseURI, isNameValid, isURIValid, normalizeURI } from 'util/lbryURI';
 
@@ -47,7 +46,7 @@ export default function SendPage(props: Props) {
       if (includesOdysee) prefix = ODYSEE_PREFIX;
 
 // @ts-expect-error - TS2339 - Property 'slice' does not exist on type 'unknown'.
-      let query = (value && value.slice(prefix.length).replace(/:/g, '#')) || '';
+      const query = (value && value.slice(prefix.length).replace(/:/g, '#')) || '';
       try {
         const lbryUrl = `lbry://${query}`;
         parseURI(lbryUrl);

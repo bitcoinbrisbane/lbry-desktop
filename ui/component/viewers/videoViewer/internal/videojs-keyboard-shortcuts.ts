@@ -140,7 +140,6 @@ const VideoJsKeyboardShorcuts = ({
     if (e.keyCode === KEYCODES.P) playPrevious();
   }
 
-  // eslint-disable-next-line flowtype/no-types-missing-file-annotation
   function handleSingleKeyActions(e: KeyboardEvent, playerRef: unknown, containerRef: unknown) {
     if (e.altKey || e.ctrlKey || e.metaKey || e.shiftKey) return;
     if (e.keyCode === KEYCODES.SPACEBAR || e.keyCode === KEYCODES.K) togglePlay(containerRef);
@@ -155,7 +154,7 @@ const VideoJsKeyboardShorcuts = ({
     if (e.keyCode === KEYCODES.LEFT) seekVideo(-SEEK_STEP_5, playerRef, containerRef);
   }
 
-  var curried_function = function (playerRef: any, containerRef: any) {
+  const curried_function = function (playerRef: any, containerRef: any) {
     return function curried_func(e: any) {
       handleKeyDown(e, playerRef, containerRef);
     };

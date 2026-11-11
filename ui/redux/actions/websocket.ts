@@ -7,8 +7,8 @@ import { SOCKETY_SERVER_API } from 'config';
 const NOTIFICATION_WS_URL = `${SOCKETY_SERVER_API}/internal?id=`;
 const COMMENT_WS_URL = `${SOCKETY_SERVER_API}/commentron?id=`;
 
-let sockets: Record<string, any> = {};
-let closingSockets: Record<string, any> = {};
+const sockets: Record<string, any> = {};
+const closingSockets: Record<string, any> = {};
 let retryCount = 0;
 
 const getCommentSocketUrl = (claimId: unknown) => {
@@ -27,7 +27,7 @@ export const doSocketConnect = (url: unknown, cb: unknown) => {
       sockets[url] = new WebSocket(url);
       sockets[url].onopen = (e: unknown) => {
         retryCount = 0;
-        console.log('\nConnected to WS \n\n'); // eslint-disable-line
+        console.log('\nConnected to WS \n\n');  
       };
 
       sockets[url].onmessage = (e: unknown) => {
@@ -36,12 +36,12 @@ export const doSocketConnect = (url: unknown, cb: unknown) => {
       };
 
       sockets[url].onerror = (e: unknown) => {
-        console.error('websocket onerror', e); // eslint-disable-line
+        console.error('websocket onerror', e);  
         // onerror and onclose will both fire, so nothing is needed here
       };
 
       sockets[url].onclose = () => {
-        console.log('\n Disconnected from WS\n\n'); // eslint-disable-line
+        console.log('\n Disconnected from WS\n\n');  
         if (!closingSockets[url]) {
           retryCount += 1;
           connectToSocket();
@@ -70,7 +70,7 @@ export const doSocketDisconnect = (url: unknown) => (dispatch: unknown) => {
 export const doNotificationSocketConnect = (enableNotifications: unknown) => (dispatch: unknown) => {
   const authToken = getAuthToken();
   if (!authToken) {
-    console.error('Unable to connect to web socket because auth token is missing'); // eslint-disable-line
+    console.error('Unable to connect to web socket because auth token is missing');  
     return;
   }
 

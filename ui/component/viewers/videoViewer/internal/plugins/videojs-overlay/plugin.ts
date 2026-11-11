@@ -32,9 +32,9 @@ const registerPlugin = videojs.registerPlugin || videojs.plugin;
  * @return {Boolean}
  */
 
-/* eslint-disable no-self-compare */
+ 
 const isNumber = (n: unknown) => typeof n === 'number' && n === n;
-/* eslint-enable no-self-compare */
+ 
 
 /**
  * Whether a value is a string with no whitespace.

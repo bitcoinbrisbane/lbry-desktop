@@ -11,7 +11,7 @@ function generateStreamUrl(claimName: unknown, claimId: unknown) {
 }
 
 function generateEmbedUrl(claimName: unknown, claimId: unknown, includeStartTime: unknown, startTime: unknown, referralLink: unknown) {
-  let urlParams = new URLSearchParams();
+  const urlParams = new URLSearchParams();
   if (includeStartTime && startTime) {
     urlParams.append('t', startTime);
   }

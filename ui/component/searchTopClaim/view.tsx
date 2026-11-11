@@ -63,7 +63,7 @@ export default function SearchTopClaim(props: Props) {
   }, [setChannelActive, winningUriIsChannel]);
 
   React.useEffect(() => {
-    let urisToResolve: unknown = [];
+    const urisToResolve: unknown = [];
     if (uriFromQuery) {
 // @ts-expect-error - TS2339 - Property 'push' does not exist on type 'unknown'.
       urisToResolve.push(uriFromQuery);

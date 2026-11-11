@@ -446,7 +446,7 @@ export default handleActions(
       function deleteReacts(reactObj: unknown, commentIdsToRemove: unknown) {
 // @ts-expect-error - TS2339 - Property 'length' does not exist on type 'unknown'.
         if (commentIdsToRemove && commentIdsToRemove.length > 0) {
-          let reactionKeys = Object.keys(reactObj);
+          const reactionKeys = Object.keys(reactObj);
           reactionKeys.forEach((rk) => {
             const colonIndex = rk.indexOf(':');
             const commentId = colonIndex === -1 ? rk : rk.substring(0, colonIndex);
@@ -512,11 +512,11 @@ export default handleActions(
         const superChatForUri = superChatsByUri[uri];
         const superChatCommentsForUri = superChatForUri && superChatForUri.comments;
 
-        let sortedSuperChatComments: unknown = [];
+        const sortedSuperChatComments: unknown = [];
         let hasAddedNewComment = false;
         if (superChatCommentsForUri && superChatCommentsForUri.length > 0) {
           // Go for the entire length of superChatCommentsForUri since a comment will be added to this list
-          for (var i = 0; i < superChatCommentsForUri.length; i++) {
+          for (let i = 0; i < superChatCommentsForUri.length; i++) {
             const existingSuperChat = superChatCommentsForUri[i];
             if (existingSuperChat.support_amount < comment.support_amount && !hasAddedNewComment) {
               hasAddedNewComment = true;

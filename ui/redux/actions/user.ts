@@ -13,7 +13,7 @@ import { Lbryio } from 'lbryinc';
 import { DOMAIN } from 'config';
 import { getDefaultLanguage } from 'util/default-languages';
 const AUTH_IN_PROGRESS = 'authInProgress';
-export let sessionStorageAvailable = false;
+export const sessionStorageAvailable = false;
 
 export function doInstallNew(appVersion: unknown, os = null, firebaseToken = null, callbackForUsersWhoAreSharingData: unknown, domain: unknown) {
   const payload = { app_version: appVersion, domain } as const;

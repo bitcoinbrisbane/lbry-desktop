@@ -486,7 +486,7 @@ export function doAnalyticsTagSync() {
 
 export function doAnaltyicsPurchaseEvent(fileInfo: unknown) {
   return () => {
-    let purchasePrice = fileInfo.purchase_receipt && fileInfo.purchase_receipt.amount;
+    const purchasePrice = fileInfo.purchase_receipt && fileInfo.purchase_receipt.amount;
     if (purchasePrice) {
       const purchaseInt = Number(Number(purchasePrice).toFixed(0));
       analytics.purchaseEvent(purchaseInt);

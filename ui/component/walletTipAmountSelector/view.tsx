@@ -1,4 +1,3 @@
-// @ts-expect-error - TS2882 (ts-migration)
 import 'scss/component/_wallet-tip-selector.scss';
 import { FormField } from 'component/common/form';
 import { Lbryio } from 'lbryinc';

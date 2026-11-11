@@ -7,9 +7,9 @@ import moment from 'moment';
 import { getDefaultLanguage } from 'util/default-languages';
 
 const reducers: Record<string, any> = {};
-let settingLanguage: unknown = [];
+const settingLanguage: unknown = [];
 try {
-  let appLanguage = window.localStorage.getItem(SETTINGS.LANGUAGE);
+  const appLanguage = window.localStorage.getItem(SETTINGS.LANGUAGE);
   settingLanguage.push(appLanguage);
 } catch (e: any) {}
 settingLanguage.push(getDefaultLanguage());

@@ -19,7 +19,7 @@ type Props = {
 function FileWatchLaterLink(props: Props) {
   const { uri, hasClaimInWatchLater, doToast, doCollectionEdit, focusable = true } = props;
   const buttonRef = useRef();
-  let isHovering = useHover(buttonRef);
+  const isHovering = useHover(buttonRef);
 
   function handleWatchLater(e: unknown) {
 // @ts-expect-error - TS2339 - Property 'preventDefault' does not exist on type 'unknown'.

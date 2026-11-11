@@ -51,7 +51,7 @@ export function doNotificationList(types?: Array<string>) {
 
     dispatch({ type: ACTIONS.NOTIFICATION_LIST_STARTED });
 
-    let params: any = { is_app_readable: true };
+    const params: any = { is_app_readable: true };
     if (types) {
       params.type = types.join(',');
     }

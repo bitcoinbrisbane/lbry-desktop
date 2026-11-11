@@ -25,7 +25,7 @@ export default class Daemon {
   }
 
   launch() {
-    let flags = ['start'];
+    const flags = ['start'];
 
     if (fs.existsSync(Daemon.headersPath)) {
       flags.push(`--initial-headers=${Daemon.headersPath}`);

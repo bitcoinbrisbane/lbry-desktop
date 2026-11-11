@@ -1,5 +1,4 @@
 import type {ElementRef} from 'react';
-// @ts-expect-error - TS2305 (ts-migration)
 import { URL, URL_LOCAL, URL_DEV, KNOWN_APP_DOMAINS } from 'config';
 import * as PAGES from 'constants/pages';
 import * as ICONS from 'constants/icons';
@@ -161,7 +160,7 @@ export default function WunderBarSuggestions(props: Props) {
       navigateToSearchPage(value);
     } else {
 // @ts-expect-error - TS2339 - Property 'slice' does not exist on type 'unknown'.
-      let query = 'lbry://' + value.slice(LBRY_PROTOCOL.length).replace(/:/g, '#');
+      const query = 'lbry://' + value.slice(LBRY_PROTOCOL.length).replace(/:/g, '#');
       try {
         if (isURIValid(query)) {
           const uri = normalizeURI(query);

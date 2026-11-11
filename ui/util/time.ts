@@ -1,7 +1,7 @@
 export function secondsToHms(seconds: number) {
   seconds = Math.floor(seconds);
-  var hours = Math.floor(seconds / 3600);
-  var minutes = Math.floor(seconds / 60) % 60;
+  const hours = Math.floor(seconds / 3600);
+  const minutes = Math.floor(seconds / 60) % 60;
   var seconds = seconds % 60;
 
   return [hours, minutes, seconds]

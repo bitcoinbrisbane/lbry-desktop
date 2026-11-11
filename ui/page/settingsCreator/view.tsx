@@ -70,9 +70,9 @@ export default function SettingsCreatorPage(props: Props) {
   const [slowModeMin, setSlowModeMin] = React.useState(0);
   const [lastUpdated, setLastUpdated] = React.useState(1);
 
-  const pushSlowModeMinDebounced = React.useMemo(() => debounce(pushSlowModeMin, 1000), []); // eslint-disable-line react-hooks/exhaustive-deps
-  const pushMinTipDebounced = React.useMemo(() => debounce(pushMinTip, 1000), []); // eslint-disable-line react-hooks/exhaustive-deps
-  const pushMinSuperDebounced = React.useMemo(() => debounce(pushMinSuper, 1000), []); // eslint-disable-line react-hooks/exhaustive-deps
+  const pushSlowModeMinDebounced = React.useMemo(() => debounce(pushSlowModeMin, 1000), []);  
+  const pushMinTipDebounced = React.useMemo(() => debounce(pushMinTip, 1000), []);  
+  const pushMinSuperDebounced = React.useMemo(() => debounce(pushMinSuper, 1000), []);  
 
   // **************************************************************************
   // **************************************************************************

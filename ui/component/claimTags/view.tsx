@@ -16,7 +16,7 @@ export default function ClaimTags(props: Props) {
   const { tags, followedTags, type } = props;
   const numberOfTags = type === 'small' ? SLIM_TAGS : type === 'large' ? LARGE_TAGS : NORMAL_TAGS;
 
-  let tagsToDisplay: unknown = [];
+  const tagsToDisplay: unknown = [];
 
   if (tags.includes('mature')) {
 // @ts-expect-error - TS2339 - Property 'push' does not exist on type 'unknown'.

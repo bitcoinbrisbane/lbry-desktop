@@ -29,7 +29,7 @@ class DateTime extends React.Component<Props, State> {
 
   static getTimeAgoStr(date: any) {
     const suffixList = ['years', 'months', 'days', 'hours', 'minutes', 'seconds', ''];
-    var duration = 0;
+    let duration = 0;
 
     for (var i = 0; i < suffixList.length; ++i) {
       // moment() is very liberal with it's rounding.

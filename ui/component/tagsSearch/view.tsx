@@ -104,7 +104,7 @@ export default function TagsSearch(props: Props) {
   function handleSubmit(e: unknown) {
 // @ts-expect-error - TS2339 - Property 'preventDefault' does not exist on type 'unknown'.
     e.preventDefault();
-    let tags = newTag.trim();
+    const tags = newTag.trim();
 
     if (tags.length === 0) {
       return;
