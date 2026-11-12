@@ -13,6 +13,9 @@ export const handleActions =
 
       if (handler) {
         const newState = handler(state, action);
+        // A handler that returns the state it was given changed nothing. Keep the same object so
+        // connected components don't recompute for a no-op (#707).
+        if (newState === state) return state;
         return Object.assign({}, state, newState);
       }
 
