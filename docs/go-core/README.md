@@ -11,7 +11,7 @@ already sends to `lbrynet`, and forwards everything to `lbrynet` until a method 
 All of this comes from `ui/lbry.ts` (`apiCall`).
 
 - **Transport:** HTTP `POST` to `http://localhost:5279`, with the method name repeated in the query string
-  (`?m=<method>`). Nothing in the app reads the query string, but `lbrynet` logs it, so keep it.
+  (`?m=<method>`). The shim should accept the query string; the body is what carries the call.
 - **Request body:** JSON-RPC 2.0, `{ "jsonrpc": "2.0", "method", "params", "id" }`, where `id` is a
   millisecond timestamp, so it is not unique per call.
 - **Request headers:** `Content-Type: application/json-rpc`. The app adds `X-Lbry-Auth-Token` after
