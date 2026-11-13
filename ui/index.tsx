@@ -316,4 +316,5 @@ function AppWrapper() {
   );
 }
 
+throw new Error("smoke negative test: renderer startup exception");
 ReactDOM.render(<AppWrapper />, document.getElementById("app"));
