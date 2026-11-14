@@ -60,7 +60,7 @@ const BIP39 = "abandon abandon abandon abandon abandon abandon abandon abandon a
 const PASSWORD = "correct horse battery";
 const NEW_PHRASE = "alpha bravo charlie delta echo foxtrot golf hotel india juliet kilo lima";
 
-function makeWallet(overrides: Record<string, any> = {}) {
+function makeWallet(overrides: Record<string, any> = {}): any {
   return {
     status: jest.fn().mockResolvedValue({ exists: false }),
     create: jest.fn().mockResolvedValue({ mnemonic: NEW_PHRASE }),
@@ -250,5 +250,93 @@ describe("WalletSetup: import", () => {
 
     expect(await screen.findByText("Incorrect something")).toBeTruthy();
     expect(onWalletReady).not.toHaveBeenCalled();
+  });
+});
+
+describe("WalletSetup: use my existing LBRY wallet", () => {
+  const found = {
+    found: true,
+    path: "/home/u/.local/share/lbry/lbryum/wallets/default_wallet",
+    name: "My Wallet",
+    encrypted: false,
+  };
+
+  async function renderWithExisting(existing: any, extra: Record<string, any> = {}) {
+    const wallet = makeWallet({
+      findLbrynet: jest.fn().mockResolvedValue(existing),
+      importLbrynet: jest.fn().mockResolvedValue({ exists: true }),
+      ...extra,
+    });
+    const ctx = await renderSetup(wallet);
+    return ctx;
+  }
+
+  it("offers it first when an unprotected wallet is found", async () => {
+    await renderWithExisting(found);
+    expect(await screen.findByText("Use my existing LBRY wallet")).toBeTruthy();
+    expect(screen.getByText(/We found a LBRY wallet on this computer \(My Wallet\)/)).toBeTruthy();
+    expect(screen.getByText("Create a new wallet")).toBeTruthy();
+    expect(screen.getByText("I have a recovery phrase")).toBeTruthy();
+  });
+
+  it("does not offer it when nothing is found, or when the check fails", async () => {
+    await renderWithExisting({ found: false });
+    expect(screen.queryByText("Use my existing LBRY wallet")).toBeNull();
+    expect(screen.getByText("Create a new wallet")).toBeTruthy();
+  });
+
+  it("copes with the check failing", async () => {
+    await renderWithExisting(null, { findLbrynet: jest.fn().mockRejectedValue(new Error("boom")) });
+    expect(await screen.findByText("Create a new wallet")).toBeTruthy();
+    expect(screen.queryByText("Use my existing LBRY wallet")).toBeNull();
+  });
+
+  it("explains that a password-protected wallet has to be restored with its phrase", async () => {
+    await renderWithExisting({ ...found, encrypted: true });
+    expect(await screen.findByText(/protected with a password, so it cannot be brought in automatically/)).toBeTruthy();
+    expect(screen.queryByText("Use my existing LBRY wallet")).toBeNull();
+    expect(screen.getByText("I have a recovery phrase")).toBeTruthy();
+  });
+
+  it("asks for a new password, says the old file is untouched, and imports with it", async () => {
+    const { wallet, onWalletReady, container } = await renderWithExisting(found);
+    fireEvent.click(await screen.findByText("Use my existing LBRY wallet"));
+    expect(screen.getByText(/Your existing wallet file is not changed or deleted/)).toBeTruthy();
+
+    type("wallet_setup_password", "short");
+    type("wallet_setup_password_confirm", "short");
+    fireEvent.click(screen.getByText("Use this wallet"));
+    expect(screen.getByText("The password must be at least 8 characters.")).toBeTruthy();
+    expect(wallet.importLbrynet).not.toHaveBeenCalled();
+
+    type("wallet_setup_password", PASSWORD);
+    type("wallet_setup_password_confirm", PASSWORD);
+    fireEvent.click(screen.getByText("Use this wallet"));
+
+    await waitFor(() => expect(onWalletReady).toHaveBeenCalledTimes(1));
+    expect(wallet.importLbrynet).toHaveBeenCalledWith(PASSWORD);
+    // The phrase is never shown for an existing wallet: its owner already has it.
+    expect(screen.queryByTestId("copyable")).toBeNull();
+    expect(container.textContent).toBe("");
+  });
+
+  it("shows the error from the main process and does not report ready", async () => {
+    const { onWalletReady } = await renderWithExisting(found, {
+      importLbrynet: jest.fn().mockRejectedValue(new Error("does not match its public key")),
+    });
+    fireEvent.click(await screen.findByText("Use my existing LBRY wallet"));
+    type("wallet_setup_password", PASSWORD);
+    type("wallet_setup_password_confirm", PASSWORD);
+    fireEvent.click(screen.getByText("Use this wallet"));
+
+    expect(await screen.findByText("does not match its public key")).toBeTruthy();
+    expect(onWalletReady).not.toHaveBeenCalled();
+  });
+
+  it("goes back to the choice", async () => {
+    await renderWithExisting(found);
+    fireEvent.click(await screen.findByText("Use my existing LBRY wallet"));
+    fireEvent.click(screen.getByText("Back"));
+    expect(screen.getByText("Create a new wallet")).toBeTruthy();
   });
 });

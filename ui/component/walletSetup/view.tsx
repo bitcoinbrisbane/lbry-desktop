@@ -14,9 +14,14 @@ export type WalletApi = {
   status: () => Promise<{ exists: boolean; error?: string }>;
   create: (options: { password: string }) => Promise<{ mnemonic: string }>;
   import: (options: { password: string; mnemonic: string; scheme?: "lbry" | "bip44" }) => Promise<unknown>;
+  // An existing lbrynet wallet on this computer (optional: only the Electron app has one to find).
+  findLbrynet?: () => Promise<ExistingWallet>;
+  importLbrynet?: (password: string) => Promise<unknown>;
 };
 
-type Step = "loading" | "none" | "choose" | "create" | "import" | "backup" | "done" | "error";
+type ExistingWallet = { found: boolean; path?: string; name?: string; encrypted?: boolean; error?: string };
+
+type Step = "loading" | "none" | "choose" | "create" | "import" | "existing" | "backup" | "done" | "error";
 
 type Props = {
   onWalletReady: () => void;
@@ -43,6 +48,7 @@ export default function WalletSetup(props: Props) {
   const [saved, setSaved] = React.useState(false);
   // The new wallet's recovery phrase, held only while the backup step is on screen.
   const [newPhrase, setNewPhrase] = React.useState<string | null>(null);
+  const [existing, setExisting] = React.useState<ExistingWallet | null>(null);
 
   React.useEffect(() => {
     let active = true;
@@ -53,8 +59,17 @@ export default function WalletSetup(props: Props) {
         if (status.error) {
           setError(status.error);
           setStep("error");
+        } else if (status.exists) {
+          setStep("none");
         } else {
-          setStep(status.exists ? "none" : "choose");
+          setStep("choose");
+          // Is there a wallet from the old app to bring in? A failure here just means there is not.
+          if (wallet.findLbrynet) {
+            wallet
+              .findLbrynet()
+              .then((found) => active && setExisting(found))
+              .catch(() => {});
+          }
         }
       })
       .catch((e) => {
@@ -128,6 +143,26 @@ export default function WalletSetup(props: Props) {
     }
   }
 
+  async function useExisting() {
+    const problem = validatePasswords(password, confirm);
+    if (problem || !wallet.importLbrynet) {
+      setError(problem ? __(problem) : __("This wallet cannot be imported here."));
+      return;
+    }
+    setBusy(true);
+    setError(null);
+    try {
+      await wallet.importLbrynet(password);
+      clearSecrets();
+      setStep("done");
+      onWalletReady();
+    } catch (e) {
+      setError(errorText(e));
+    } finally {
+      setBusy(false);
+    }
+  }
+
   function finishBackup() {
     setNewPhrase(null);
     setSaved(false);
@@ -150,6 +185,7 @@ export default function WalletSetup(props: Props) {
   }
 
   if (step === "choose") {
+    const usable = existing && existing.found && !existing.encrypted;
     return (
       <Card
         title={__("Set up your wallet")}
@@ -157,12 +193,83 @@ export default function WalletSetup(props: Props) {
           "Your wallet is created on this computer and protected by a password. You will get a recovery phrase: it is the only way to get your Credits back if this computer is lost."
         )}
         actions={
-          <div className="section__actions">
-            {/* @ts-expect-error - TS2322 (ts-migration) */}
-            <Button button="primary" label={__("Create a new wallet")} onClick={() => setStep("create")} />
-            {/* @ts-expect-error - TS2322 (ts-migration) */}
-            <Button button="secondary" label={__("I have a recovery phrase")} onClick={() => setStep("import")} />
-          </div>
+          <React.Fragment>
+            {usable && (
+              <p className="help">
+                {__("We found a LBRY wallet on this computer (%name%). You can keep using it.", {
+                  name: (existing && existing.name) || "",
+                })}
+              </p>
+            )}
+            {existing && existing.found && existing.encrypted && (
+              <p className="help--warning">
+                {__(
+                  "We found a LBRY wallet on this computer, but it is protected with a password, so it cannot be brought in automatically. Restore it with its recovery phrase."
+                )}
+              </p>
+            )}
+            <div className="section__actions">
+              {usable && (
+                <Button
+                  // @ts-expect-error - TS2322 (ts-migration)
+                  button="primary"
+                  label={__("Use my existing LBRY wallet")}
+                  onClick={() => setStep("existing")}
+                />
+              )}
+              <Button
+                // @ts-expect-error - TS2322 (ts-migration)
+                button={usable ? "secondary" : "primary"}
+                label={__("Create a new wallet")}
+                onClick={() => setStep("create")}
+              />
+              {/* @ts-expect-error - TS2322 (ts-migration) */}
+              <Button button="secondary" label={__("I have a recovery phrase")} onClick={() => setStep("import")} />
+            </div>
+          </React.Fragment>
+        }
+      />
+    );
+  }
+
+  if (step === "existing") {
+    return (
+      <Card
+        title={__("Use my existing LBRY wallet")}
+        subtitle={__(
+          "This copies the recovery phrase of your LBRY wallet into a new wallet in this app, protected by a password you choose now. Your existing wallet file is not changed or deleted. It still holds your recovery phrase unprotected on disk."
+        )}
+        actions={
+          // @ts-expect-error - TS2769 - No overload matches this call.
+          <Form onSubmit={useExisting} className="section">
+            <FormField
+              autoFocus
+              type="password"
+              name="wallet_setup_password"
+              label={__("Password")}
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+            <FormField
+              type="password"
+              name="wallet_setup_password_confirm"
+              label={__("Confirm password")}
+              value={confirm}
+              onChange={(e) => setConfirm(e.target.value)}
+            />
+            {errorLine}
+            <div className="section__actions">
+              <Button
+                // @ts-expect-error - TS2322 (ts-migration)
+                button="primary"
+                type="submit"
+                label={busy ? __("Importing...") : __("Use this wallet")}
+                disabled={!password || !confirm || busy}
+              />
+              {/* @ts-expect-error - TS2322 (ts-migration) */}
+              <Button button="link" label={__("Back")} onClick={back} disabled={busy} />
+            </div>
+          </Form>
         }
       />
     );
