@@ -10,6 +10,7 @@ import { autoUpdater } from "electron-updater";
 import Lbry from "lbry";
 import LbryFirstInstance from "./LbryFirstInstance";
 import Daemon from "./Daemon";
+import { basicAuthHeader, daemonCredentials, shouldAuthenticate } from "./daemonAuth";
 import isDev from "electron-is-dev";
 import createTray from "./createTray";
 import createWindow from "./createWindow";
@@ -100,6 +101,9 @@ if (isDev) {
 
 const startDaemon = async () => {
   let isDaemonRunning = false;
+
+  // The main process calls the daemon itself (status, settings_get, stop), outside the browser session.
+  Lbry.setApiHeader("Authorization", basicAuthHeader(daemonCredentials()));
 
   await Lbry.status()
     .then(() => {
@@ -242,9 +246,16 @@ if (!gotSingleInstanceLock) {
     // If an "Origin" header is passed, the SDK will check that it is set to allow that origin in the daemon_settings.yml
     // By default, electron sends http://localhost:{port} as the origin for POST requests
     // https://github.com/electron/electron/issues/7931#issuecomment-361759277
+    //
+    // The daemon's credentials are added here too, not in the renderer, so the renderer never has them. Adding
+    // the header after the browser has decided about CORS also keeps the preflight a plain one, which the
+    // Python daemon would refuse if it had to allow an Authorization header.
     session.defaultSession.webRequest.onBeforeSendHeaders((details, callback) => {
       if (details.method === "POST" && details.requestHeaders["Content-Type"] === "application/json-rpc") {
         delete details.requestHeaders["Origin"];
+        if (shouldAuthenticate(details, Lbry.daemonConnectionString, rendererWindow?.webContents?.id)) {
+          details.requestHeaders["Authorization"] = basicAuthHeader(daemonCredentials());
+        }
       }
       callback({ cancel: false, requestHeaders: details.requestHeaders });
     });

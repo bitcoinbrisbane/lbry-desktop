@@ -3,6 +3,7 @@ import path from "path";
 import fs from "fs";
 import { spawn, execSync } from "child_process";
 import Lbry from "lbry";
+import { daemonCredentials, daemonEnvironment } from "./daemonAuth";
 
 export default class Daemon {
   static lbrynetPath =
@@ -31,7 +32,7 @@ export default class Daemon {
       flags.push(`--initial-headers=${Daemon.headersPath}`);
     }
 
-    this.subprocess = spawn(Daemon.lbrynetPath, flags);
+    this.subprocess = spawn(Daemon.lbrynetPath, flags, { env: daemonEnvironment(daemonCredentials()) });
     this.subprocess.stdout.on("data", (data) => console.log(`Daemon: ${data}`));
     this.subprocess.stderr.on("data", (data) => console.error(`Daemon: ${data}`));
     this.subprocess.on("exit", () => this.fire("exit"));
